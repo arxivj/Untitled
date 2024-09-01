@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:untitled/presenter/themes/mode/dark_app_theme.dart';
+import 'package:untitled/presenter/themes/mode/light_app_theme.dart';
+import 'package:untitled/provider/theme_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -9,11 +20,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: true,
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Untitled',
-      home: Home(),
-      debugShowMaterialGrid: true,
+      themeMode: themeProvider.themeMode,
+      theme: LightAppTheme().themeData,
+      darkTheme: DarkAppTheme().themeData,
+      home: const Home(),
     );
   }
 }
@@ -23,13 +38,22 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: const Center(
-        child: Text(
-          'Home',
-          style:
-              TextStyle(color: Colors.black, decoration: TextDecoration.none),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.grey[200],
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: const Text('Home'),
+          elevation: 0,
+        ),
+        body: Container(
+          color: Colors.white,
+          child: const Center(
+            child: Text(
+              'Home',
+              style: TextStyle(fontSize: 24),
+            ),
+          ),
         ),
       ),
     );
