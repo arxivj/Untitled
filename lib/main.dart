@@ -1,9 +1,13 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:untitled/pages/chat.dart';
+import 'package:untitled/pages/home.dart';
+import 'package:untitled/pages/like.dart';
+import 'package:untitled/pages/settings.dart';
 import 'package:untitled/presenter/themes/mode/dark_app_theme.dart';
 import 'package:untitled/presenter/themes/mode/light_app_theme.dart';
 import 'package:untitled/provider/theme_provider.dart';
+import 'package:untitled/widgets/navigation.dart';
 
 void main() {
   runApp(
@@ -55,10 +59,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: const Text('MainScreen'),
+          title: const Text(
+            'MainScreen',
+          ),
           elevation: 0,
         ),
         body: AnimatedSwitcher(
@@ -75,148 +81,6 @@ class _MainScreenState extends State<MainScreen> {
               currentPageIndex = index;
             });
           },
-        ),
-      ),
-    );
-  }
-}
-
-class Navigation extends StatelessWidget {
-  final int currentPageIndex;
-  final ValueChanged<int> onDestinationSelected;
-
-  const Navigation({
-    required this.currentPageIndex,
-    required this.onDestinationSelected,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return NavigationBar(
-      destinations: const [
-        NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-        NavigationDestination(icon: Icon(Icons.favorite), label: 'Like'),
-        NavigationDestination(icon: Icon(Icons.chat), label: 'Chat'),
-        NavigationDestination(icon: Icon(Icons.settings), label: 'Settings'),
-      ],
-      selectedIndex: currentPageIndex,
-      onDestinationSelected: onDestinationSelected,
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Home Page',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 20),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const NavigatorTestPage(),
-                ),
-              );
-            },
-            icon: const Icon(Icons.home, size: 100, color: Colors.blue),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Like extends StatelessWidget {
-  const Like({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.favorite, size: 100, color: Colors.red),
-          SizedBox(height: 20),
-          Text(
-            'Favorite Stocks',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Chat extends StatelessWidget {
-  const Chat({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.chat, size: 100, color: Colors.green),
-          SizedBox(height: 20),
-          Text(
-            'Let\'s Talk',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class Settings extends StatelessWidget {
-  const Settings({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.settings, size: 100, color: Colors.grey),
-          SizedBox(height: 20),
-          Text(
-            'App Settings',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class NavigatorTestPage extends StatelessWidget {
-  const NavigatorTestPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Test Success',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-          ],
         ),
       ),
     );

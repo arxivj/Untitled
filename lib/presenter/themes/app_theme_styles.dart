@@ -1,0 +1,3 @@
+class AppThemeStyles {
+  const AppThemeStyles();
+}
