@@ -1,0 +1,3 @@
+class AppThemeTypography {
+  const AppThemeTypography();
+}
