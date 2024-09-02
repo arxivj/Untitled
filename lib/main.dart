@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled/pages/chat.dart';
-import 'package:untitled/pages/home.dart';
-import 'package:untitled/pages/like.dart';
-import 'package:untitled/pages/settings.dart';
+import 'package:untitled/presenter/navigation/navigation.dart';
+import 'package:untitled/presenter/pages/chat.dart';
+import 'package:untitled/presenter/pages/home.dart';
+import 'package:untitled/presenter/pages/like.dart';
+import 'package:untitled/presenter/pages/settings.dart';
 import 'package:untitled/presenter/themes/mode/dark_app_theme.dart';
 import 'package:untitled/presenter/themes/mode/light_app_theme.dart';
 import 'package:untitled/provider/theme_provider.dart';
-import 'package:untitled/widgets/navigation.dart';
 
 void main() {
   runApp(

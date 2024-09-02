@@ -1,8 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled/presenter/colors/app_theme_colors.dart';
 import 'package:untitled/presenter/themes/app_theme_styles.dart';
 import 'package:untitled/presenter/themes/app_theme_typography.dart';
+import 'package:untitled/presenter/themes/colors/app_theme_colors.dart';
 import 'package:untitled/utils/font_family.dart';
 
 class AppTheme extends ThemeExtension<AppTheme> {
@@ -29,7 +29,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
   ThemeData get themeData => ThemeData(
         useMaterial3: false,
         platform: TargetPlatform.iOS,
-        extensions: [this],
+        extensions: [this], // this는 현재의 AppTheme 객체
         brightness: brightness,
         scaffoldBackgroundColor: colors.scaffoldBackground,
         hintColor: colors.onSurface,
