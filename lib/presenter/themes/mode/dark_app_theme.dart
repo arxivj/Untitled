@@ -1,29 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/presenter/colors/app_theme_colors.dart';
 import 'package:untitled/presenter/themes/app_theme.dart';
+import 'package:untitled/presenter/themes/app_theme_styles.dart';
+import 'package:untitled/presenter/themes/mode/app_theme_type.dart';
 
 class DarkAppTheme extends AppTheme {
   DarkAppTheme()
       : super(
-          name: 'dark',
+          name: AppThemeType.dark.name,
           brightness: Brightness.dark,
+          colors: AppThemeColors.fromAppColors(isDarkMode: true),
+          styles: const AppThemeStyles(),
         );
-
-  // DarkAppTheme()
-  //     : super(
-  //   name: 'dark',
-  //   brightness: Brightness.dark,
-  //   colors: AppThemeColors.fromAppColors(isDarkMode: true),
-  //   styles: const AppThemeStyles(
-  //     cardShadow: [
-  //       BoxShadow(
-  //         color: Color(0x4D000000),
-  //         offset: Offset(0, 2),
-  //         blurRadius: 4,
-  //       ),
-  //     ],
-  //   ),
-  // );
-
-  @override
-  ThemeData get themeData => super.themeData.copyWith();
 }

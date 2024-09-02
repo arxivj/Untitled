@@ -59,10 +59,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: const Text('MainScreen'),
+          title: const Text(
+            'MainScreen',
+          ),
           elevation: 0,
         ),
         body: AnimatedSwitcher(
