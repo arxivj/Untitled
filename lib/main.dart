@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-
-    return MaterialApp(
+    return
+      MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Untitled',
       themeMode: themeProvider.themeMode,
@@ -60,13 +60,6 @@ class _MainScreenState extends State<MainScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: const Text(
-            'MainScreen',
-          ),
-          elevation: 0,
-        ),
         body: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
           transitionBuilder: (Widget child, Animation<double> animation) {

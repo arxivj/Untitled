@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/presenter/themes/app_theme_styles.dart';
 import 'package:untitled/presenter/themes/app_theme_typography.dart';
+import 'package:untitled/presenter/themes/colors/app_colors.dart';
 import 'package:untitled/presenter/themes/colors/app_theme_colors.dart';
 import 'package:untitled/utils/font_family.dart';
 
@@ -59,8 +60,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
           contentPadding:
               const EdgeInsets.symmetric(vertical: 8, horizontal: 42),
           filled: true,
-          fillColor: colors.searchBarColor,
-          // colors.scaffoldBackground를 사용
+          fillColor: colors.tabBarColor,
           hintStyle: TextStyle(
             fontWeight: FontWeight.w500,
             color: Colors.grey.withOpacity(0.4),
@@ -69,12 +69,21 @@ class AppTheme extends ThemeExtension<AppTheme> {
             borderRadius: BorderRadius.circular(100),
             borderSide: BorderSide.none,
           ),
-          prefixIconColor: colors.textColor,
-          suffixIconColor: colors.textColor,
+          prefixIconColor: colors.onSurface,
+          suffixIconColor: colors.onSurface,
         ),
         tabBarTheme: TabBarTheme(
-          labelColor: colors.tabBarColor,
-          unselectedLabelColor: colors.onSurface.withOpacity(0.6),
+          labelColor: colors.onSurface,
+          unselectedLabelColor: AppColors.darkGrey,
+          indicator: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: colors.onPrimary,
+          ),
+          labelPadding: const EdgeInsets.symmetric(horizontal: 4),
+          indicatorSize: TabBarIndicatorSize.label,
+          overlayColor: WidgetStateProperty.all(Colors.transparent),
+          // InkWell 효과 제거
+          splashFactory: NoSplash.splashFactory,
         ),
         buttonTheme: ButtonThemeData(
           buttonColor: colors.buttonColor,
