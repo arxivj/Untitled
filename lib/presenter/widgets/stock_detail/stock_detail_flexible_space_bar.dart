@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 Widget StockDetailFlexibleSpaceBar(context) {
   return FlexibleSpaceBar(
@@ -76,10 +77,10 @@ Widget StockDetailFlexibleSpaceBar(context) {
                         borderRadius:
                         BorderRadius.circular(50),
                       ),
-                      // child: SvgPicture.asset(
-                      //   "assets/icons/symbols/aapl.svg",
-                      //   fit: BoxFit.contain,
-                      // ),
+                      child: SvgPicture.asset(
+                        'assets/symbols/aapl.svg',
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ],
                 ),

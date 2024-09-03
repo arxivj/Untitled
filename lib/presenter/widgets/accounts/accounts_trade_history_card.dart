@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/presenter/pages/stock_detail_page.dart';
 import 'package:untitled/presenter/themes/app_theme.dart';
 import 'package:untitled/presenter/widgets/card_layout.dart';
 import 'package:untitled/utils/constants.dart';
@@ -37,67 +38,77 @@ class TradeHistoryCard extends StatelessWidget {
           style: appTheme.typographies.headlineMedium,
         ),
         children: [
-          Container(
-            padding: AppPadding.kContentPadding,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: appTheme.colors.buttonColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Container(
-                        padding: AppPadding.smallPadding(),
-                        child: Icon(
-                          Icons.sell_outlined,
-                          color: appTheme.colors.buttonIconColor,
-                          size: 24,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const StockDetailPage(),
+                ),
+              );
+            },
+            child: Container(
+              padding: AppPadding.kContentPadding,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: appTheme.colors.buttonColor,
+                          shape: BoxShape.circle,
                         ),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          tradeHistory.stockName,
-                          style: appTheme.typographies.titleSmall,
-                        ),
-                        Text(
-                          tradeHistory.stockSymbol,
-                          style: appTheme.typographies.bodySmall.copyWith(
-                            color: appTheme.colors.error,
+                        child: Container(
+                          padding: AppPadding.smallPadding(),
+                          child: Icon(
+                            Icons.sell_outlined,
+                            color: appTheme.colors.buttonIconColor,
+                            size: 24,
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      tradeHistory.tradePrice,
-                      style: appTheme.typographies.titleSmall,
-                    ),
-                    Text(
-                      tradeHistory.tradeChange,
-                      style: appTheme.typographies.bodySmall.copyWith(
-                        color: appTheme.colors.error,
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      const SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tradeHistory.stockName,
+                            style: appTheme.typographies.titleSmall,
+                          ),
+                          Text(
+                            tradeHistory.stockSymbol,
+                            style: appTheme.typographies.bodySmall.copyWith(
+                              color: appTheme.colors.error,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        tradeHistory.tradePrice,
+                        style: appTheme.typographies.titleSmall,
+                      ),
+                      Text(
+                        tradeHistory.tradeChange,
+                        style: appTheme.typographies.bodySmall.copyWith(
+                          color: appTheme.colors.error,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled/presenter/pages/stock_detail_page.dart';
 import 'package:untitled/presenter/widgets/theme_switcher_button.dart';
 import 'package:untitled/provider/theme_provider.dart';
 import 'package:untitled/utils/constants.dart';
@@ -16,14 +15,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: false,
       elevation: 0,
       leading: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const StockDetailPage(),
-            ),
-          );
-        },
+        onTap: () {},
         child: Container(
           width: 40,
           height: 40,
