@@ -6,6 +6,9 @@ class ThemeProvider extends ChangeNotifier {
   // 현재 테마 모드를 반환하는 getter
   ThemeMode get themeMode => _themeMode;
 
+  // 현재 테마가 다크 모드인지 확인하는 getter
+  bool get isDarkMode => _themeMode == ThemeMode.dark;
+
   // 테마 모드를 수동으로 설정할 때 사용할 메서드
   void setThemeMode(ThemeMode themeMode) {
     _themeMode = themeMode;
