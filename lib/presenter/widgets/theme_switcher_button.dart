@@ -8,9 +8,9 @@ class ThemeSwitcherButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const ThemeSwitcherButton({
-    super.key,
     required this.isDarkTheme,
     required this.onPressed,
+    super.key,
   });
 
   @override
@@ -19,6 +19,8 @@ class ThemeSwitcherButton extends StatelessWidget {
       onPressed: onPressed,
       icon: Icon(isDarkTheme ? _darkThemeIcon : _lightThemeIcon),
       iconSize: 25,
+      constraints: const BoxConstraints(),
+      splashRadius: 20,
     );
   }
 }
