@@ -10,7 +10,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
   final String fontFamily;
   final Brightness brightness;
   final AppThemeColors colors;
-  final AppThemeTypography typography;
+  final AppThemeTypography typographies;
   final AppThemeStyles styles;
 
   AppTheme({
@@ -18,7 +18,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
     required this.brightness,
     required this.colors,
     this.styles = const AppThemeStyles(),
-    this.typography = const AppThemeTypography(),
+    this.typographies = const AppThemeTypography(),
     this.fontFamily = FontFamily.circularStd,
   });
 
@@ -29,7 +29,8 @@ class AppTheme extends ThemeExtension<AppTheme> {
   ThemeData get themeData => ThemeData(
         useMaterial3: false,
         platform: TargetPlatform.iOS,
-        extensions: [this], // this는 현재의 AppTheme 객체
+        extensions: [this],
+        // this는 현재의 AppTheme 객체
         brightness: brightness,
         scaffoldBackgroundColor: colors.scaffoldBackground,
         hintColor: colors.onSurface,
@@ -38,24 +39,38 @@ class AppTheme extends ThemeExtension<AppTheme> {
           foregroundColor: colors.textColor,
         ),
         textTheme: TextTheme(
-          displayLarge: typography.displayLarge,
-          displayMedium: typography.displayMedium,
-          displaySmall: typography.displaySmall,
-          headlineLarge: typography.headlineLarge,
-          headlineMedium: typography.headlineMedium,
-          headlineSmall: typography.headlineSmall,
-          titleLarge: typography.titleLarge,
-          titleMedium: typography.titleMedium,
-          titleSmall: typography.titleSmall,
-          bodyLarge: typography.bodyLarge,
-          bodyMedium: typography.bodyMedium,
-          bodySmall: typography.bodySmall,
-          labelLarge: typography.labelLarge,
-          labelMedium: typography.labelMedium,
-          labelSmall: typography.labelSmall,
+          displayLarge: typographies.displayLarge,
+          displayMedium: typographies.displayMedium,
+          displaySmall: typographies.displaySmall,
+          headlineLarge: typographies.headlineLarge,
+          headlineMedium: typographies.headlineMedium,
+          headlineSmall: typographies.headlineSmall,
+          titleLarge: typographies.titleLarge,
+          titleMedium: typographies.titleMedium,
+          titleSmall: typographies.titleSmall,
+          bodyLarge: typographies.bodyLarge,
+          bodyMedium: typographies.bodyMedium,
+          bodySmall: typographies.bodySmall,
+          labelLarge: typographies.labelLarge,
+          labelMedium: typographies.labelMedium,
+          labelSmall: typographies.labelSmall,
         ),
-        searchBarTheme: SearchBarThemeData(
-          backgroundColor: WidgetStateProperty.all(colors.searchBarColor),
+        inputDecorationTheme: InputDecorationTheme(
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 8, horizontal: 42),
+          filled: true,
+          fillColor: colors.searchBarColor,
+          // colors.scaffoldBackground를 사용
+          hintStyle: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: Colors.grey.withOpacity(0.4),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(100),
+            borderSide: BorderSide.none,
+          ),
+          prefixIconColor: colors.textColor,
+          suffixIconColor: colors.textColor,
         ),
         tabBarTheme: TabBarTheme(
           labelColor: colors.tabBarColor,
@@ -102,7 +117,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
       name: name ?? this.name,
       brightness: brightness ?? this.brightness,
       colors: colors ?? this.colors,
-      typography: typography ?? this.typography,
+      typographies: typography ?? this.typographies,
       styles: styles ?? this.styles,
       fontFamily: fontFamily ?? this.fontFamily,
     );
@@ -117,7 +132,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
       name: name,
       brightness: brightness,
       colors: colors.lerp(other.colors, t),
-      typography: typography.lerp(other.typography, t),
+      typographies: typographies.lerp(other.typographies, t),
       styles: styles,
       fontFamily: fontFamily,
     );
