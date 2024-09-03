@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/presenter/colors/app_colors.dart';
+import 'package:untitled/presenter/themes/colors/app_colors.dart';
 
 // [AppThemeColors] : AppColors에 정의된 색상들을 사용하여 테마에 필요한 색상 팔레트를 구성
 class AppThemeColors {
@@ -38,24 +38,36 @@ class AppThemeColors {
   static AppThemeColors fromAppColors({
     required bool isDarkMode,
   }) {
+    final lightColors = {
+      'scaffoldBackground': AppColors.lightScaffoldBackground,
+      'searchBarColor': AppColors.lightSearchBarColor,
+      'tabBarColor': AppColors.lightTabBarColor,
+      'buttonColor': AppColors.lightButtonColor,
+      'buttonIconColor': AppColors.lightButtonIconColor,
+      'textColor': AppColors.lightTextColor,
+      'titleColor': AppColors.lightTitleColor,
+    };
+
+    final darkColors = {
+      'scaffoldBackground': AppColors.darkScaffoldBackground,
+      'searchBarColor': AppColors.darkSearchBarColor,
+      'tabBarColor': AppColors.darkTabBarColor,
+      'buttonColor': AppColors.darkButtonColor,
+      'buttonIconColor': AppColors.darkButtonIconColor,
+      'textColor': AppColors.darkTextColor,
+      'titleColor': AppColors.darkTitleColor,
+    };
+
+    final selectedColors = isDarkMode ? darkColors : lightColors;
+
     return AppThemeColors(
-      scaffoldBackground: isDarkMode
-          ? AppColors.darkScaffoldBackground
-          : AppColors.lightScaffoldBackground,
-      searchBarColor: isDarkMode
-          ? AppColors.darkSearchBarColor
-          : AppColors.lightSearchBarColor,
-      tabBarColor:
-          isDarkMode ? AppColors.darkTabBarColor : AppColors.lightTabBarColor,
-      buttonColor:
-          isDarkMode ? AppColors.darkButtonColor : AppColors.lightButtonColor,
-      buttonIconColor: isDarkMode
-          ? AppColors.darkButtonIconColor
-          : AppColors.lightButtonIconColor,
-      textColor:
-          isDarkMode ? AppColors.darkTextColor : AppColors.lightTextColor,
-      titleColor:
-          isDarkMode ? AppColors.darkTitleColor : AppColors.lightTitleColor,
+      scaffoldBackground: selectedColors['scaffoldBackground']!,
+      searchBarColor: selectedColors['searchBarColor']!,
+      tabBarColor: selectedColors['tabBarColor']!,
+      buttonColor: selectedColors['buttonColor']!,
+      buttonIconColor: selectedColors['buttonIconColor']!,
+      textColor: selectedColors['textColor']!,
+      titleColor: selectedColors['titleColor']!,
       surface: AppColors.surface,
       error: AppColors.error,
       onPrimary: AppColors.onPrimary,
