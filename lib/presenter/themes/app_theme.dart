@@ -60,16 +60,16 @@ class AppTheme extends ThemeExtension<AppTheme> {
           contentPadding:
               const EdgeInsets.symmetric(vertical: 8, horizontal: 42),
           filled: true,
-          fillColor: colors.tabBarColor,
-          hintStyle: TextStyle(
+          fillColor: colors.searchBarColor,
+          hintStyle: const TextStyle(
             fontWeight: FontWeight.w500,
-            color: Colors.grey.withOpacity(0.4),
+            color: Color(0xFF797f88),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(100),
             borderSide: BorderSide.none,
           ),
-          prefixIconColor: colors.onSurface,
+          prefixIconColor: const Color(0xFF797e89),
           suffixIconColor: colors.onSurface,
         ),
         tabBarTheme: TabBarTheme(

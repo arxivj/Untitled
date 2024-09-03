@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   // LightMode
   static const Color lightScaffoldBackground = Color(0xFFF7F7F7);
-  static const Color lightSearchBarColor = Color(0xFFedeff2);
+  static const Color lightSearchBarColor = Color(0xFFedeff3);
   static const Color lightTabBarColor = Color(0xFFD9D9D9);
   static const Color lightButtonColor = Color(0xFFE8F0FD);
   static const Color lightButtonIconColor = Color(0xFF4478E2);
