@@ -14,12 +14,9 @@ class Settings extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Settings',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: appTheme.colors.textColor,
-          ),
+          style: appTheme.typographies.headlineSmall
         ),
         elevation: 0,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: SingleChildScrollView(
         child: Padding(

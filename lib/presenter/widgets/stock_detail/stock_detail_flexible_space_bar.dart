@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:untitled/utils/constants.dart';
 
 Widget StockDetailFlexibleSpaceBar(context) {
   return FlexibleSpaceBar(
@@ -24,12 +25,11 @@ Widget StockDetailFlexibleSpaceBar(context) {
                         Text(
                           "Apple",
                           style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
                             fontSize: 24,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        Spacing.height(4.0),
                         RichText(
                           text: TextSpan(
                             children: [
@@ -57,7 +57,7 @@ Widget StockDetailFlexibleSpaceBar(context) {
                             ],
                           ),
                         ),
-                        SizedBox(height: 4),
+                        Spacing.height(4.0),
                         Text(
                           "capital at risk",
                           style: TextStyle(
@@ -87,8 +87,8 @@ Widget StockDetailFlexibleSpaceBar(context) {
               ),
             ],
           ),
-          SizedBox(height: 16),
-          Container(
+          Spacing.mediumHeight(),
+          Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 8,
             ),
@@ -133,12 +133,12 @@ Widget StockDetailFlexibleSpaceBar(context) {
                   onPressed: () {},
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.resolveWith(
+                    WidgetStateProperty.resolveWith(
                           (states) {
                         return Colors.grey[200];
                       },
                     ),
-                    padding: MaterialStateProperty.resolveWith(
+                    padding: WidgetStateProperty.resolveWith(
                           (states) {
                         return const EdgeInsets.symmetric(
                           vertical: 8,
@@ -146,7 +146,7 @@ Widget StockDetailFlexibleSpaceBar(context) {
                         );
                       },
                     ),
-                    shape: MaterialStateProperty.resolveWith(
+                    shape: WidgetStateProperty.resolveWith(
                           (states) {
                         return RoundedRectangleBorder(
                           borderRadius:
