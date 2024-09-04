@@ -16,6 +16,7 @@ class HomeTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
       padding: AppPadding.kVerticalSmallPadding,
       child: TabBar(
         padding: AppPadding.kHorizontalPadding,

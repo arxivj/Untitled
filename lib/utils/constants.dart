@@ -9,10 +9,10 @@ abstract class AppDimensions {
 }
 
 abstract class AppPadding {
-  static const EdgeInsets kHorizontalPadding = EdgeInsets.symmetric(horizontal: 16.0);
-  static const EdgeInsets kVerticalSmallPadding = EdgeInsets.symmetric(vertical: 8.0);
-  static const EdgeInsets kLeftPadding = EdgeInsets.only(left: 16.0);
-  static const EdgeInsets kContentPadding = EdgeInsets.all(16.0);
+  static const EdgeInsets kHorizontalPadding = EdgeInsets.symmetric(horizontal: AppDimensions.medium);
+  static const EdgeInsets kVerticalSmallPadding = EdgeInsets.symmetric(vertical: AppDimensions.small);
+  static const EdgeInsets kLeftPadding = EdgeInsets.only(left: AppDimensions.medium);
+  static const EdgeInsets kContentPadding = EdgeInsets.all(AppDimensions.medium);
 
   static EdgeInsets smallPadding() => const EdgeInsets.all(AppDimensions.small);
   static EdgeInsets mediumPadding() => const EdgeInsets.all(AppDimensions.medium);
@@ -20,7 +20,7 @@ abstract class AppPadding {
 }
 
 abstract class AppSizes {
-  static const Size kAppBarHeight = Size.fromHeight(56.0);
+  static const Size kAppBarHeight = Size.fromHeight(AppDimensions.appBarHeight);
 }
 
 abstract class Spacing {

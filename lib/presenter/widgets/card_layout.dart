@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/utils/constants.dart';
 
 class CardLayout extends StatelessWidget {
   final Widget? title;
@@ -11,7 +12,7 @@ class CardLayout extends StatelessWidget {
   const CardLayout({
     required this.children,
     this.title,
-    this.titleSpacing = 16.0,
+    this.titleSpacing = AppDimensions.medium,
     super.key,
     this.padding = const EdgeInsets.all(12),
     this.backgroundColor = Colors.white,
