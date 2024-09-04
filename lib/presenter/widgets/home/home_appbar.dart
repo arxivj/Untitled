@@ -28,7 +28,6 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       title: ThemeSwitcherButton(
-        isDarkTheme: themeProvider.isDarkMode,
         onPressed: () => themeProvider.toggleThemeMode(),
       ),
       actions: [
