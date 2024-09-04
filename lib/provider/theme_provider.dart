@@ -1,34 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled/presenter/core/exceptions.dart';
 
 class ThemeProvider extends ChangeNotifier {
+  static const String themeModeKey = 'themeMode';
   ThemeMode _themeMode = ThemeMode.light;
+  SharedPreferences? _sharedPreferences;
 
-  // 현재 테마 모드를 반환하는 getter
-  ThemeMode get themeMode => _themeMode;
-
-  // 현재 테마가 다크 모드인지 확인하는 getter
-  bool get isDarkMode => _themeMode == ThemeMode.dark;
-
-  // 테마 모드를 수동으로 설정할 때 사용할 메서드
-  void setThemeMode(ThemeMode themeMode) {
-    _themeMode = themeMode;
-
-    notifyListeners();
+  ThemeProvider() {
+    initPreferences();
   }
 
-  // 이전에 설정된 테마 모드를 로컬 저장소에서 불러올 때 사용할 메서드
-  Future<void> loadThemeMode() async {
-    // 로컬 저장소에서 테마 모드를 불러오는 로직을 여기에 추가하면 됨
+  ThemeMode get themeMode => _themeMode;
 
-    notifyListeners();
+  Future<void> initPreferences() async {
+    try {
+      _sharedPreferences = await SharedPreferences.getInstance();
+      loadSavedThemeMode();
+    } catch (e) {
+      throw ThemeProviderException(
+        'Failed to initialize SharedPreferences: $e',
+      );
+    }
+  }
+
+  void loadSavedThemeMode() {
+    if (_sharedPreferences == null) {
+      throw ThemeProviderException('SharedPreferences is not initialized.');
+    }
+
+    try {
+      final String? savedThemeMode =
+          _sharedPreferences!.getString(themeModeKey);
+      _themeMode = ThemeMode.values.firstWhere(
+        (e) => e.name == savedThemeMode,
+        orElse: () => ThemeMode.light,
+      );
+      notifyListeners();
+    } catch (e) {
+      throw ThemeProviderException('Failed to load saved theme mode: $e');
+    }
   }
 
   void toggleThemeMode() {
-    if (_themeMode == ThemeMode.light) {
-      _themeMode = ThemeMode.dark;
-    } else {
-      _themeMode = ThemeMode.light;
-    }
+    final newThemeMode =
+        _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    setThemeMode(newThemeMode);
+    saveThemeMode();
+  }
+
+  // 설정창에서 set만 해서 어떻게 변하는지 보고, save 하는 경우도 존재하기 떄문에 별도의 메서드로 분리해서 사용
+  void setThemeMode(ThemeMode themeMode) {
+    _themeMode = themeMode;
     notifyListeners();
+  }
+
+  Future<void> saveThemeMode() async {
+    if (_sharedPreferences == null) {
+      throw ThemeProviderException('SharedPreferences is not initialized.');
+    }
+
+    try {
+      await _sharedPreferences?.setString(themeModeKey, _themeMode.name);
+    } catch (e) {
+      throw ThemeProviderException('Failed to save theme mode: $e');
+    }
   }
 }
