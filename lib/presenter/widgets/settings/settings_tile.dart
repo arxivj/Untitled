@@ -23,7 +23,7 @@ class SettingsTile extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        splashFactory: NoSplash.splashFactory,
+        splashFactory: InkRipple.splashFactory,
         onTap: onTap,
         child: ListTile(
           leading: Icon(
