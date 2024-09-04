@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/presenter/themes/app_theme.dart';
 import 'package:untitled/presenter/widgets/card_layout.dart';
 import 'package:untitled/presenter/widgets/settings/settings_tile.dart';
+import 'package:untitled/utils/constants.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = Theme.of(context).extension<AppTheme>()!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Settings',
-          style: TextStyle(color: Colors.black),
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            color: appTheme.colors.textColor,
+          ),
         ),
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+          padding: AppPadding.kContentPadding,
           child: Column(
             children: [
               CardLayout(
@@ -42,9 +47,7 @@ class Settings extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 16.0,
-              ),
+              Spacing.mediumHeight(),
               CardLayout(
                 backgroundColor: Theme.of(context).cardColor,
                 children: [
@@ -76,9 +79,7 @@ class Settings extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 16.0,
-              ),
+              Spacing.mediumHeight(),
               CardLayout(
                 backgroundColor: Theme.of(context).cardColor,
                 children: [

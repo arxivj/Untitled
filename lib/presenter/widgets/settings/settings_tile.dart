@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/presenter/themes/app_theme.dart';
 
 class SettingsTile extends StatelessWidget {
   final IconData icon;
@@ -16,25 +17,31 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: Theme.of(context).colorScheme.primary,
-      ),
-      title: Text(
-        title,
-        style: Theme.of(context).textTheme.bodyLarge,
-      ),
-      subtitle: subtitle != null
-          ? Text(
-        subtitle!,
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: Theme.of(context).hintColor,
+    final appTheme = Theme.of(context).extension<AppTheme>()!;
+    return Material(
+      color: Colors.transparent,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        splashFactory: NoSplash.splashFactory,
+        onTap: onTap,
+        child: ListTile(
+          leading: Icon(
+            icon,
+            color: appTheme.colors.textColor,
+          ),
+          title: Text(
+            title,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: appTheme.colors.textColor,
+                ),
+          ),
+          subtitle: subtitle != null
+              ? Text(subtitle!, style: appTheme.typographies.bodySmall)
+              : null,
+          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         ),
-      )
-          : null,
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: onTap,
+      ),
     );
   }
 }
