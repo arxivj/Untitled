@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   // LightMode
   static const Color lightScaffoldBackground = Color(0xFFF7F7F7);
+  static const Color lightCardBackground = Color(0xFFFFFFFF);
+  static const Color lightCardShadowColor = Color(0xFFB0BEC5);
   static const Color lightSearchBarColor = Color(0xFFedeff3);
   static const Color lightTabBarColor = Color(0xFFD9D9D9);
   static const Color lightButtonColor = Color(0xFFE8F0FD);
@@ -12,12 +14,14 @@ abstract class AppColors {
   static const Color lightPrimary = Color(0xFF4478E2);
 
   // DarkMode
-  static const Color darkScaffoldBackground = Color(0xFF303030);
-  static const Color darkSearchBarColor = Color(0xFF424242);
-  static const Color darkTabBarColor = Color(0xFF424242);
-  static const Color darkButtonColor = Color(0xFF3D80DE);
-  static const Color darkButtonIconColor = Color(0xFFC5D9F4);
-  static const Color darkTextColor = Color(0xFFFFFFFF);
+  static const Color darkScaffoldBackground = Color(0xFF000000);
+  static const Color darkCardBackground = Color(0xFF161616);
+  static const Color darkCardShadowColor = Color(0xFFB0BEC5);
+  static const Color darkSearchBarColor = Color(0xFF232323);
+  static const Color darkTabBarColor = Color(0xFF161616);
+  static const Color darkButtonColor = Color(0xFF1a212e);
+  static const Color darkButtonIconColor = Color(0xFF3783f9);
+  static const Color darkTextColor = Color(0xFFf7f7f7);
   static const Color darkTitleColor = Color(0xFFC0C0C0);
 
   static const Color surface = Color(0xFFFFFFFF);

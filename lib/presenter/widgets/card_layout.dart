@@ -6,7 +6,6 @@ class CardLayout extends StatelessWidget {
   final double titleSpacing; // 타이틀과 카드 사이의 간격
   final List<Widget> children;
   final EdgeInsetsGeometry padding; // 카드 내부의 패딩
-  final Color backgroundColor;
   final BorderRadiusGeometry borderRadius;
 
   const CardLayout({
@@ -15,7 +14,6 @@ class CardLayout extends StatelessWidget {
     this.titleSpacing = AppDimensions.medium,
     super.key,
     this.padding = const EdgeInsets.all(12),
-    this.backgroundColor = Colors.white,
     this.borderRadius = const BorderRadius.all(Radius.circular(14)),
   });
 
@@ -28,11 +26,7 @@ class CardLayout extends StatelessWidget {
           title!,
           SizedBox(height: titleSpacing),
         ],
-        Container(
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(14),
-          ),
+        Card(
           child: Padding(
             padding: padding,
             child: Column(

@@ -24,7 +24,6 @@ class Settings extends StatelessWidget {
           child: Column(
             children: [
               CardLayout(
-                backgroundColor: Theme.of(context).cardColor,
                 children: [
                   SettingsTile(
                     icon: Icons.person,
@@ -46,7 +45,6 @@ class Settings extends StatelessWidget {
               ),
               Spacing.mediumHeight(),
               CardLayout(
-                backgroundColor: Theme.of(context).cardColor,
                 children: [
                   SettingsTile(
                     icon: Icons.info_outline,
@@ -78,7 +76,6 @@ class Settings extends StatelessWidget {
               ),
               Spacing.mediumHeight(),
               CardLayout(
-                backgroundColor: Theme.of(context).cardColor,
                 children: [
                   SettingsTile(
                     icon: Icons.logout_rounded,

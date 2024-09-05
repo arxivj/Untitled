@@ -32,7 +32,6 @@ class TradeHistoryCard extends StatelessWidget {
     return Padding(
       padding: AppPadding.kHorizontalPadding,
       child: CardLayout(
-        backgroundColor: Theme.of(context).cardColor,
         title: Text(
           'Trade History',
           style: appTheme.typographies.headlineMedium,

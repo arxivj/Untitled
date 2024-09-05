@@ -8,13 +8,13 @@ class AccountDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 객체로 가져와야 하지만, 우선은 변수로
-    const String accountNumber = '12345678-01';
+    // 참고로 계좌번호와 AppKey, AppSecret은 사용자 한테 입력 받아야됨
+    const String accountNumber = '12345678-12';
     const String accountType = '위탁계좌';
     const String accountBalance = '14,000,000원';
     final appTheme = Theme.of(context).extension<AppTheme>()!;
 
     return CardLayout(
-      backgroundColor: Theme.of(context).cardColor,
       borderRadius: BorderRadius.circular(14),
       children: [
         Row(
@@ -23,36 +23,19 @@ class AccountDetailsCard extends StatelessWidget {
             Text(
               '$accountNumber $accountType',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.normal,
-                color: Theme.of(context).hintColor,
-                fontSize: 11,
-              ),
-            ),
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(100),
-                onTap: () {},
-                child: const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Icon(
-                    Icons.copy,
-                    color: Colors.red,
-                    size: 14,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 11,
                   ),
-                ),
-              ),
             ),
           ],
         ),
         Row(
           children: [
-            Text(
+            const Text(
               accountBalance,
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             IconButton(
@@ -63,20 +46,18 @@ class AccountDetailsCard extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 padding: const EdgeInsets.all(4),
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_drop_down,
-                  color: appTheme.colors.buttonIconColor,
                   size: 16,
                 ),
               ),
             ),
           ],
         ),
-        Text(
+        const Text(
           'Korea Won (KRW)',
           style: TextStyle(
             fontSize: 11,
-            color: Theme.of(context).hintColor,
           ),
         ),
         const SizedBox(height: 16),

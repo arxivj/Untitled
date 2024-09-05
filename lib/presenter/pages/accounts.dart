@@ -26,6 +26,8 @@ class AccountsWidget extends StatelessWidget {
           ),
           Spacing.largeHeight(),
           TradeHistoryCard(tradeHistory: tradeHistory),
+          Spacing.largeHeight(),
+          TradeHistoryCard(tradeHistory: tradeHistory),
           Spacing.extraLargeHeight(),
         ],
       ),

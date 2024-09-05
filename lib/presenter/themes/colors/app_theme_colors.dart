@@ -4,6 +4,8 @@ import 'package:untitled/presenter/themes/colors/app_colors.dart';
 // [AppThemeColors] : AppColors에 정의된 색상들을 사용하여 테마에 필요한 색상 팔레트를 구성
 class AppThemeColors {
   final Color scaffoldBackground;
+  final Color cardBackground;
+  final Color cardShadowColor;
   final Color searchBarColor;
   final Color tabBarColor;
   final Color buttonColor;
@@ -20,6 +22,8 @@ class AppThemeColors {
 
   const AppThemeColors({
     required this.scaffoldBackground,
+    required this.cardBackground,
+    required this.cardShadowColor,
     required this.searchBarColor,
     required this.tabBarColor,
     required this.buttonColor,
@@ -40,6 +44,8 @@ class AppThemeColors {
   }) {
     final lightColors = {
       'scaffoldBackground': AppColors.lightScaffoldBackground,
+      'cardBackground' : AppColors.lightCardBackground,
+      'cardShadowColor': AppColors.lightCardShadowColor,
       'searchBarColor': AppColors.lightSearchBarColor,
       'tabBarColor': AppColors.lightTabBarColor,
       'buttonColor': AppColors.lightButtonColor,
@@ -50,6 +56,8 @@ class AppThemeColors {
 
     final darkColors = {
       'scaffoldBackground': AppColors.darkScaffoldBackground,
+      'cardBackground' : AppColors.darkCardBackground,
+      'cardShadowColor': AppColors.darkCardShadowColor,
       'searchBarColor': AppColors.darkSearchBarColor,
       'tabBarColor': AppColors.darkTabBarColor,
       'buttonColor': AppColors.darkButtonColor,
@@ -62,6 +70,8 @@ class AppThemeColors {
 
     return AppThemeColors(
       scaffoldBackground: selectedColors['scaffoldBackground']!,
+      cardBackground: selectedColors['cardBackground']!,
+      cardShadowColor: selectedColors['cardShadowColor']!,
       searchBarColor: selectedColors['searchBarColor']!,
       tabBarColor: selectedColors['tabBarColor']!,
       buttonColor: selectedColors['buttonColor']!,
@@ -85,6 +95,8 @@ class AppThemeColors {
     return AppThemeColors(
       scaffoldBackground:
           Color.lerp(scaffoldBackground, other.scaffoldBackground, t)!,
+      cardBackground: Color.lerp(cardBackground, other.cardShadowColor, t)!,
+      cardShadowColor: Color.lerp(cardShadowColor, other.cardShadowColor, t)!,
       searchBarColor: Color.lerp(searchBarColor, other.searchBarColor, t)!,
       tabBarColor: Color.lerp(tabBarColor, other.tabBarColor, t)!,
       buttonColor: Color.lerp(buttonColor, other.buttonColor, t)!,
