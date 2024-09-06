@@ -61,6 +61,11 @@ class Navigation extends StatelessWidget {
           ),
         ),
         child: NavigationBar(
+          animationDuration: const Duration(milliseconds: 1200),
+          overlayColor: WidgetStateProperty.all(Colors.transparent),
+          indicatorShape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
           selectedIndex: currentPageIndex,
           onDestinationSelected: onDestinationSelected,
           destinations: <NavigationDestination>[
