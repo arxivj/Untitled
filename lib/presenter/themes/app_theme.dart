@@ -56,6 +56,16 @@ class AppTheme extends ThemeExtension<AppTheme> {
           labelMedium: typographies.labelMedium,
           labelSmall: typographies.labelSmall,
         ),
+        cardTheme: CardTheme(
+          color: colors.cardBackground,
+          shadowColor: colors.cardShadowColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          elevation: 0.2,
+          clipBehavior: Clip.antiAlias,
+          surfaceTintColor: Colors.transparent,
+        ),
         inputDecorationTheme: InputDecorationTheme(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 8, horizontal: 42),
@@ -73,11 +83,11 @@ class AppTheme extends ThemeExtension<AppTheme> {
           suffixIconColor: colors.onSurface,
         ),
         tabBarTheme: TabBarTheme(
-          labelColor: colors.onSurface,
+          labelColor: colors.textColor,
           unselectedLabelColor: AppColors.darkGrey,
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            color: colors.onPrimary,
+            color: colors.tabBarColor,
           ),
           labelPadding: const EdgeInsets.symmetric(horizontal: 4),
           indicatorSize: TabBarIndicatorSize.label,

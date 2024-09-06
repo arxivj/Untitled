@@ -111,7 +111,7 @@ Widget StockDetailFlexibleSpaceBar(context) {
                         );
                       },
                     ),
-                    shape: MaterialStateProperty.resolveWith(
+                    shape: WidgetStateProperty.resolveWith(
                           (states) {
                         return RoundedRectangleBorder(
                           borderRadius:

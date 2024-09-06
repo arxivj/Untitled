@@ -39,7 +39,7 @@ class SettingsTile extends StatelessWidget {
           subtitle: subtitle != null
               ? Text(subtitle!, style: appTheme.typographies.bodySmall)
               : null,
-          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+          trailing: Icon(Icons.arrow_forward_ios, size: 16, color: appTheme.colors.textColor,),
         ),
       ),
     );
