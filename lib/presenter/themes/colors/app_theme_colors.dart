@@ -42,50 +42,45 @@ class AppThemeColors {
   static AppThemeColors fromAppColors({
     required bool isDarkMode,
   }) {
-    final lightColors = {
-      'scaffoldBackground': AppColors.lightScaffoldBackground,
-      'cardBackground' : AppColors.lightCardBackground,
-      'cardShadowColor': AppColors.lightCardShadowColor,
-      'searchBarColor': AppColors.lightSearchBarColor,
-      'tabBarColor': AppColors.lightTabBarColor,
-      'buttonColor': AppColors.lightButtonColor,
-      'buttonIconColor': AppColors.lightButtonIconColor,
-      'textColor': AppColors.lightTextColor,
-      'titleColor': AppColors.lightTitleColor,
-    };
-
-    final darkColors = {
-      'scaffoldBackground': AppColors.darkScaffoldBackground,
-      'cardBackground' : AppColors.darkCardBackground,
-      'cardShadowColor': AppColors.darkCardShadowColor,
-      'searchBarColor': AppColors.darkSearchBarColor,
-      'tabBarColor': AppColors.darkTabBarColor,
-      'buttonColor': AppColors.darkButtonColor,
-      'buttonIconColor': AppColors.darkButtonIconColor,
-      'textColor': AppColors.darkTextColor,
-      'titleColor': AppColors.darkTitleColor,
-    };
-
-    final selectedColors = isDarkMode ? darkColors : lightColors;
-
-    return AppThemeColors(
-      scaffoldBackground: selectedColors['scaffoldBackground']!,
-      cardBackground: selectedColors['cardBackground']!,
-      cardShadowColor: selectedColors['cardShadowColor']!,
-      searchBarColor: selectedColors['searchBarColor']!,
-      tabBarColor: selectedColors['tabBarColor']!,
-      buttonColor: selectedColors['buttonColor']!,
-      buttonIconColor: selectedColors['buttonIconColor']!,
-      textColor: selectedColors['textColor']!,
-      titleColor: selectedColors['titleColor']!,
-      surface: AppColors.surface,
-      error: AppColors.error,
-      onPrimary: AppColors.onPrimary,
-      onSecondary: AppColors.onSecondary,
-      onBackground: AppColors.onBackground,
-      onSurface: AppColors.onSurface,
-      onError: AppColors.onError,
-    );
+    if (isDarkMode) {
+      return const AppThemeColors(
+        scaffoldBackground: AppColors.darkScaffoldBackground,
+        cardBackground: AppColors.darkCardBackground,
+        cardShadowColor: AppColors.darkCardShadowColor,
+        searchBarColor: AppColors.darkSearchBarColor,
+        tabBarColor: AppColors.darkTabBarColor,
+        buttonColor: AppColors.darkButtonColor,
+        buttonIconColor: AppColors.darkButtonIconColor,
+        textColor: AppColors.darkTextColor,
+        titleColor: AppColors.darkTitleColor,
+        surface: AppColors.darkSurface,
+        error: AppColors.darkError,
+        onPrimary: AppColors.darkOnPrimary,
+        onSecondary: AppColors.darkOnSecondary,
+        onBackground: AppColors.darkOnBackground,
+        onSurface: AppColors.darkOnSurface,
+        onError: AppColors.darkOnError,
+      );
+    } else {
+      return const AppThemeColors(
+        scaffoldBackground: AppColors.lightScaffoldBackground,
+        cardBackground: AppColors.lightCardBackground,
+        cardShadowColor: AppColors.lightCardShadowColor,
+        searchBarColor: AppColors.lightSearchBarColor,
+        tabBarColor: AppColors.lightTabBarColor,
+        buttonColor: AppColors.lightButtonColor,
+        buttonIconColor: AppColors.lightButtonIconColor,
+        textColor: AppColors.lightTextColor,
+        titleColor: AppColors.lightTitleColor,
+        surface: AppColors.lightSurface,
+        error: AppColors.lightError,
+        onPrimary: AppColors.lightOnPrimary,
+        onSecondary: AppColors.lightOnSecondary,
+        onBackground: AppColors.lightOnBackground,
+        onSurface: AppColors.lightOnSurface,
+        onError: AppColors.lightOnError,
+      );
+    }
   }
 
   AppThemeColors lerp(covariant dynamic other, double t) {
@@ -95,7 +90,7 @@ class AppThemeColors {
     return AppThemeColors(
       scaffoldBackground:
           Color.lerp(scaffoldBackground, other.scaffoldBackground, t)!,
-      cardBackground: Color.lerp(cardBackground, other.cardShadowColor, t)!,
+      cardBackground: Color.lerp(cardBackground, other.cardBackground, t)!,
       cardShadowColor: Color.lerp(cardShadowColor, other.cardShadowColor, t)!,
       searchBarColor: Color.lerp(searchBarColor, other.searchBarColor, t)!,
       tabBarColor: Color.lerp(tabBarColor, other.tabBarColor, t)!,

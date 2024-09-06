@@ -13,6 +13,14 @@ abstract class AppColors {
   static const Color lightTitleColor = Color(0xFF707070);
   static const Color lightPrimary = Color(0xFF4478E2);
 
+  static const Color lightSurface = Color(0xFFFFFFFF);
+  static const Color lightError = Color(0xFFB00020);
+  static const Color lightOnPrimary = Color(0xFFFFFFFF);
+  static const Color lightOnSecondary = Color(0xFF000000);
+  static const Color lightOnBackground = Color(0xFF000000);
+  static const Color lightOnSurface = Color(0xFF000000);
+  static const Color lightOnError = Color(0xFFFFFFFF);
+
   // DarkMode
   static const Color darkScaffoldBackground = Color(0xFF000000);
   static const Color darkCardBackground = Color(0xFF161616);
@@ -23,6 +31,14 @@ abstract class AppColors {
   static const Color darkButtonIconColor = Color(0xFF3783f9);
   static const Color darkTextColor = Color(0xFFf7f7f7);
   static const Color darkTitleColor = Color(0xFFC0C0C0);
+
+  static const Color darkSurface = Color(0xFF121212);
+  static const Color darkError = Color(0xFFCF6679);
+  static const Color darkOnPrimary = Color(0xFF000000);
+  static const Color darkOnSecondary = Color(0xFFFFFFFF);
+  static const Color darkOnBackground = Color(0xFFFFFFFF);
+  static const Color darkOnSurface = Color(0xFFFFFFFF);
+  static const Color darkOnError = Color(0xFF000000);
 
   static const Color surface = Color(0xFFFFFFFF);
   static const Color error = Color(0xFFB00020);
