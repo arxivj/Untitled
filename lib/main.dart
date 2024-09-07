@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled/presenter/navigation/navigation.dart';
-import 'package:untitled/presenter/pages/chat.dart';
-import 'package:untitled/presenter/pages/home.dart';
-import 'package:untitled/presenter/pages/like.dart';
-import 'package:untitled/presenter/pages/settings.dart';
-import 'package:untitled/presenter/themes/mode/dark_app_theme.dart';
-import 'package:untitled/presenter/themes/mode/light_app_theme.dart';
-import 'package:untitled/provider/theme_provider.dart';
+import 'package:untitled/features/auth/presentation/pages/login_page.dart';
+import 'package:untitled/features/auth/presentation/providers/user_session_provider.dart';
+import 'package:untitled/features/chat/presentation/pages/chat.dart';
+import 'package:untitled/features/home/presentation/pages/home.dart';
+import 'package:untitled/features/like/presentation/pages/like.dart';
+import 'package:untitled/features/navigation/navigation.dart';
+import 'package:untitled/features/settings/presentation/pages/settings.dart';
+import 'package:untitled/providers/theme_provider.dart';
+import 'package:untitled/themes/mode/dark_app_theme.dart';
+import 'package:untitled/themes/mode/light_app_theme.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => UserSessionProvider()),
       ],
       child: const MyApp(),
     ),
@@ -32,7 +35,7 @@ class MyApp extends StatelessWidget {
       themeMode: themeProvider.themeMode,
       theme: LightAppTheme().themeData,
       darkTheme: DarkAppTheme().themeData,
-      home: const MainScreen(),
+      home: LoginPage(),
     );
   }
 }
