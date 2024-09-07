@@ -1,10 +1,10 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/core/utils/font_family.dart';
 import 'package:untitled/themes/app_theme_styles.dart';
 import 'package:untitled/themes/app_theme_typography.dart';
 import 'package:untitled/themes/colors/app_colors.dart';
 import 'package:untitled/themes/colors/app_theme_colors.dart';
-import 'package:untitled/core/utils/font_family.dart';
 
 class AppTheme extends ThemeExtension<AppTheme> {
   final String name;

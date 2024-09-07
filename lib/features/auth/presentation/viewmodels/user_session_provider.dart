@@ -1,14 +1,12 @@
-
 import 'package:flutter/cupertino.dart';
-
-class AuthUser {}
+import 'package:untitled/features/auth/domain/entities/auth_user_entity.dart';
 
 class UserSessionProvider with ChangeNotifier {
-  AuthUser? _authUser;
+  AuthUserEntity? _authUser;
 
-  AuthUser? get authUser => _authUser;
+  AuthUserEntity? get authUser => _authUser;
 
-  void setAuthUser(AuthUser user){
+  void setAuthUser(AuthUserEntity user){
     _authUser = user;
     notifyListeners();
   }
