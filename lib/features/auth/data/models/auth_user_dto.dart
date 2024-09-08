@@ -1,19 +1,18 @@
+import 'package:untitled/core/enums/platform_enum.dart';
+
 enum AuthUserFields {
-  id(key: 'id'),
-  email(key: 'email'),
-  token(key: 'accessToken'),
-  platform(key: 'platform');
-
-  final String key;
-
-  const AuthUserFields({required this.key});
+  id,
+  email,
+  token,
+  platform;
 }
 
+
 class AuthUserDTO {
-  final String id;
+  final AuthUserFields id;
   final String email;
   final String token;
-  final String platform;
+  final PlatformEnum platform;
 
   AuthUserDTO({
     required this.id,
@@ -22,22 +21,23 @@ class AuthUserDTO {
     required this.platform,
   });
 
-  factory AuthUserDTO.fromJson(Map<String, dynamic> json) {
+  factory AuthUserDTO.fromJson(Map<String, dynamic> json, PlatformEnum platform) {
+    final token = json[platform.token];
+
     return AuthUserDTO(
-      id: json[AuthUserFields.id.key],
-      email: json[AuthUserFields.email.key],
-      token: json[ AuthUserFields.token.key],
-      platform: json[ AuthUserFields.platform.key],
+      id: json[AuthUserFields.id.name],
+      email: json[AuthUserFields.email.name],
+      token: token,
+      platform: platform,
     );
   }
 
-
   Map<String, dynamic> toJson() {
     return {
-      AuthUserFields.id.key: id,
-      AuthUserFields.email.key: email,
-      AuthUserFields.token.key: token,
-      AuthUserFields.platform.key: platform,
+      AuthUserFields.id.name: id,
+      AuthUserFields.email.name: email,
+      AuthUserFields.token.name: token,
+      AuthUserFields.platform.name: platform.name,
     };
   }
 }

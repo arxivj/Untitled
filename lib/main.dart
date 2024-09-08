@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:untitled/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:untitled/features/auth/domain/repositories/auth_repository.dart';
+import 'package:untitled/features/auth/domain/usecases/login_usecase.dart';
 import 'package:untitled/features/auth/presentation/pages/login_page.dart';
 import 'package:untitled/features/chat/presentation/pages/chat.dart';
 import 'package:untitled/features/home/presentation/pages/home.dart';
@@ -16,6 +19,12 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         // ChangeNotifierProvider(create: (context) => UserSessionProvider()),
+        Provider<AuthRepository>(create: (context) => AuthRepositoryImpl()),
+        Provider<LoginUseCase>(
+          create: (context) => LoginUseCase(
+            Provider.of<AuthRepository>(context, listen: false),
+          ),
+        ),
       ],
       child: const MyApp(),
     ),

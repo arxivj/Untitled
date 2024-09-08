@@ -1,24 +1,24 @@
+import 'package:untitled/core/enums/platform_enum.dart';
 import 'package:untitled/features/auth/data/models/auth_user_dto.dart';
 import 'package:untitled/features/auth/data/models/token_dto.dart';
 import 'package:untitled/features/auth/domain/entities/auth_user_entity.dart';
+import 'package:untitled/features/auth/domain/entities/token.dart';
 import 'package:untitled/features/auth/domain/repositories/auth_repository.dart';
 
-// 데이터 소스와 상호작용 하여 Entity를 만들어 도메인 레이어로 전달하는게 주 목적
 class AuthRepositoryImpl implements AuthRepository {
   @override
-  Future<AuthUserEntity> login(String platform) async {
+  Future<AuthUserEntity> login(PlatformEnum platform) async {
     final response = await loginWithOAuth(platform);
 
-    final authUserDTO = AuthUserDTO.fromJson(response);
-
     return AuthUserEntity(
-      id: authUserDTO.id,
-      email: authUserDTO.email,
-      token: authUserDTO.token,
+      id: response[AuthUserFields.id.name],
+      email: response[AuthUserFields.email.name],
+      token: response[AuthUserFields.token.name],
+      platform: platform.key,
     );
   }
 
-  Future<Map<String, dynamic>> loginWithOAuth(String platform) async {
+  Future<Map<String, dynamic>> loginWithOAuth(PlatformEnum platform) async {
     /*
     GoogleSignInAccount._(this._googleSignIn, GoogleSignInUserData data)
       : displayName = data.displayName,
@@ -30,23 +30,24 @@ class AuthRepositoryImpl implements AuthRepository {
     */
 
     return {
-      'id': '12345',
-      'name': 'John Doe',
-      'email': 'john@example.com',
-      'token': 'abcd1234',
+      'id': 'google-id',
+      'email': 'john@gmail.com',
+      'token': 'google-auth-token',
     };
   }
 
   @override
-  Future requestToken(AuthUserEntity user) async {
+  Future<List<Token>> requestToken(AuthUserEntity user) async {
+    final response = await serverRequestToken(user);
+    final tokenDTO = TokenDTO.fromJson(response);
+    return tokenDTO.toDomain();
+  }
 
+  Future<Map<String, dynamic>> serverRequestToken(AuthUserEntity user) async {
     const response = {
       "access_token": "abcd1234",
       "refresh_token": "xyz9876"
     };
-
-    final tokenDTO = TokenDTO.fromJson(response);
-
-    return tokenDTO.toDomain();
+    return response;
   }
 }
