@@ -1,17 +1,115 @@
-# untitled
+# 프로젝트 구조
 
-A new Flutter project.
+기능별로 데이터를 처리하는 로직(data), 비즈니스 로직(domain), 프레젠테이션 로직(presentation)을 분리함
 
-## Getting Started
+## 폴더 구조
 
-This project is a starting point for a Flutter application.
+```bash
+lib/
+├── core/                 # 공통적으로 사용되는 유틸리티, 예외 처리, 유스케이스 등
+│   ├── exceptions/       # 예외 처리 관련 파일
+│   ├── usecases/         # 유스케이스 (비즈니스 로직)
+│   └── utils/            # 공통 유틸리티 파일
+│
+├── features/             # 각 기능별 모듈 (기능 중심 구조)
+│   ├── feature_a/        # 기능 A 관련 폴더
+│   │   ├── data/         # 데이터 소스, 모델, 리포지토리
+│   │   │   ├── models/     # ( 폴더명을 dto로 변경할지 고민 중 )
+│   │   │   └── repositories/ # 
+│   │   ├── domain/       # 엔티티, 유스케이스 등 비즈니스 로직
+│   │   │   ├── entities/     # 비즈니스 객체를 정의하는 엔티티
+│   │   │   ├── service/
+│   │   │   ├── usecases/     # 유스케이스 정의
+│   │   │   └── repositories/ # 도메인 레이어의 리포지토리 인터페이스
+│   │   ├── presentation/ # UI와 관련된 페이지, 뷰모델
+│   │   │   ├── pages/        # 페이지와 관련된 파일들
+│   │   │   └── viewmodels/   # 뷰모델 파일들
+│   │   └── widgets/      # 기능 A에 대한 위젯
+│   ├── feature_b/        # 기능 B 관련 폴더
+│   │   ├── data/
+│   │   ├── domain/
+│   │   ├── presentation/
+│   │   └── widgets/
+│   └── ...               # 다른 기능들도 동일한 구조
+│
+├── providers/            # 상태 관리 관련 프로바이더
+│   └── theme_provider.dart
+│
+├── themes/               # 앱 전체의 테마 및 스타일 관리
+│   ├── color/            # 색상 관련 설정 (팔레트)
+│   ├── mode/             # 다크/라이트 모드 관련 설정
+│   ├── app_theme.dart
+│   ├── app_theme_styles.dart
+│   ├── app_theme_typography.dart
+│   └── extensions.dart
+│
+├── widgets/              # 공통적으로 사용되는 재사용 가능한 위젯들
+│   ├── shared/           # 여러 페이지에서 공통적으로 사용되는 위젯
+│   └── specific/         # 특정 페이지에 종속적인 위젯
+│
+└── main.dart             # 앱의 진입점
+```
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+## 추가 설명 (auth를 예시로, 이해를 돕기위해 서버에서 데이터를 가져와 처리하는 흐름을 가정. 실제 구현은 클라이언트에서 서버로 데이터를 전달하는 흐름으로, 예시와 정반대로 구현할 예정)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+lib/
+├── features/             # 특정 기능(feature)을 정의하는 폴더 (예: Oauth 인증 기능)
+│   ├── auth/             # 인증 관련 기능을 담당하는 폴더
+│   │   ├── data/         # 실제 데이터 소스(API, 외부 서비스 등)와 상호작용하는 계층
+│   │   │   ├── models/        # 서버에서 받은 데이터를 클라이언트에서 사용하기 위한 DTO를 정의
+│   │   │   │   └── auth_user_model.dart  # 서버로부터 받은 JSON 데이터를 DTO로 변환하여 외부 데이터와 상호작용
+│   │   │   ├── repositories/  # 데이터 소스와 상호작용하여 데이터를 가져오고, DTO를 Entity로 변환하여 도메인 레이어로 전달
+│   │   │   │   ├── auth_repository_impl.dart        # 실제 레포지토리 구현. 서버에서 데이터를 가져오거나 전송하며, DTO를 Entity로 변환하여 도메인 레이어에 전달
+│   │   │   │   ├── apple_auth.dart        # X
+│   │   │   │   └── google_auth.dart       # X
+│   │   ├── domain/         # 애플리케이션의 비즈니스 로직과 규칙을 처리하는 계층
+│   │   │   ├── entities/      # 도메인 레이어에서 사용하는 데이터 구조를 정의 (비즈니스 로직에 사용되는 엔티티)
+│   │   │   │   └── auth_user_entity.dart  # 레포지토리에서 변환된 DTO를 엔티티로 변환하여 도메인 로직에서 사용
+│   │   │   ├── repositories/  # 도메인 레이어에서 사용할 레포지토리의 추상 클래스 (데이터 레이어에서 구현)
+│   │   │   │   └── auth_repository.dart   # 인증 관련 레포지토리의 추상 정의, 실제 구현은 데이터 레이어에서 수행
+│   │   │   ├── usecases/      # 비즈니스 로직을 처리하는 유스케이스. Entity를 사용해 로직을 실행하고 처리된 데이터를 반환
+│   │   │   │   └── login_usecase.dart    # 로그인 기능을 처리하는 유스케이스. 레포지토리를 호출해 엔티티를 사용해 비즈니스 로직을 처리
+│   │   ├── presentation/      # UI와 상호작용하는 계층. 뷰모델과 UI 관련 코드를 포함
+│   │   │   ├── viewmodels/    # 애플리케이션 상태를 관리하고 UseCase에서 처리된 데이터를 UI에 반영
+│   │   │   │   └── user_session_provider.dart  # UseCase에서 처리된 데이터를 기반으로 사용자 세션을 관리하며 UI에 반영
+│   │   │   ├── pages/         # 사용자에게 보여지는 화면(UI)를 정의하는 클래스들. ViewModel에서 상태를 가져와 화면에 표시
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# Untitled
+
+
+## 클린 아키텍처에서의 계층 간 관계
+
+**클린 아키텍처**에서 계층(layer) 간의 관계는 의존성의 방향에 따라 결정됨. 상위 계층은 하위 계층에 의존하지 않으며, 하위 계층만 상위 계층에 의존하는 구조를 가짐. 여기서 상위 계층은 **도메인 계층**이고, 하위 계층은 **데이터 계층**임.
+
+### 계층 간의 관계 (순서):
+1. **도메인 계층 (Domain Layer)** - 가장 상위 계층
+2. **프레젠테이션 계층 (Presentation Layer)**
+3. **데이터 계층 (Data Layer)** - 가장 하위 계층
+
+### 1. 도메인 계층 (Domain Layer)
+- 가장 상위 계층이며, 애플리케이션의 **핵심 비즈니스 로직**과 **규칙**을 처리하는 계층.
+- 도메인 계층은 다른 계층에 의존하지 않음. 대신, 다른 계층이 도메인 계층을 참조하거나 사용함.
+- **UseCase**와 **Entity**가 이 계층에 속함.
+- **도메인 계층이 상위인 이유**: 이 계층은 비즈니스 로직과 애플리케이션의 핵심 규칙을 처리하며, **외부 데이터 소스**나 **UI**와 독립적으로 설계되어 있어야 함.
+
+### 2. 프레젠테이션 계층 (Presentation Layer)
+- **도메인 계층에 의존**하며, **데이터 계층에 의존하지 않도록** 설계됨.
+- 프레젠테이션 계층은 **UI를 처리**하고, 사용자의 입력을 받아 도메인 계층(주로 UseCase)을 호출하여 데이터를 처리함.
+- **ViewModel** 또는 **Controller**가 이 계층에 속함.
+- **프레젠테이션 계층**은 도메인 계층을 사용하여 비즈니스 로직을 실행하고, 그 결과를 UI에 반영함.
+
+### 3. 데이터 계층 (Data Layer)
+- 가장 하위 계층으로, **도메인 계층에 의존**하며, 외부 시스템(API, 데이터베이스 등)과의 상호작용을 담당함.
+- **레포지토리의 구현체**, **DTO**, 그리고 **데이터 소스**(API 호출, 데이터베이스 등)가 이 계층에 속함.
+- 데이터 계층은 도메인 계층에서 정의된 추상화된 인터페이스를 구현하고, 데이터를 가져오거나 저장하는 역할을 함.
+- **데이터 계층이 하위인 이유**: 데이터 계층은 비즈니스 로직을 모르는 상태에서 단순히 데이터 처리만 수행하고, 도메인 계층에서 정의한 인터페이스를 구현하여 데이터를 전달하기 때문에 하위에 위치함.
+
+---
+
+### 계층 간 의존성 방향:
+- **프레젠테이션 계층** → **도메인 계층** (프레젠테이션은 도메인을 사용)
+- **데이터 계층** → **도메인 계층** (데이터는 도메인을 사용)
+- **도메인 계층은 다른 계층에 의존하지 않음** (독립적)
+
+이 구조는 클린 아키텍처의 핵심 원칙인 **의존성 역전 원칙**(Dependency Inversion Principle)을 따르며, 상위 계층이 하위 계층에 의존하지 않도록 보장함.
