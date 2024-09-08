@@ -1,26 +1,33 @@
 import 'package:untitled/features/auth/data/models/auth_user_dto.dart';
+import 'package:untitled/features/auth/data/models/token_dto.dart';
 import 'package:untitled/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:untitled/features/auth/domain/repositories/auth_repository.dart';
 
+// 데이터 소스와 상호작용 하여 Entity를 만들어 도메인 레이어로 전달하는게 주 목적
 class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<AuthUserEntity> login(String platform) async {
-    // API 호출 (데이터 처리)
-    final response = await loginWithOAuth(platform); // 이 부분에서 google, line, facebook, apple 모두 다른 oauth package를 사용하고 있어서 나눠서 처리해줘야함
+    final response = await loginWithOAuth(platform);
 
     final authUserDTO = AuthUserDTO.fromJson(response);
 
     return AuthUserEntity(
       id: authUserDTO.id,
-      name: authUserDTO.token,
       email: authUserDTO.email,
+      token: authUserDTO.token,
     );
   }
 
   Future<Map<String, dynamic>> loginWithOAuth(String platform) async {
-    // 플랫폼 별 OAuth 로그인 API 호출 예시
-
-    // 구글의 경우, 애플의 경우, 페이북의 경우 등등 나눠서 처리해줘야함. 심지어 리턴값도 다를 수 있음. 하지만 마지막에 변환되는건 뭐다? 항상 AuthUserEntity를 생성해서 앱에서 사용가능
+    /*
+    GoogleSignInAccount._(this._googleSignIn, GoogleSignInUserData data)
+      : displayName = data.displayName,
+        email = data.email,
+        id = data.id,
+        photoUrl = data.photoUrl,
+        serverAuthCode = data.serverAuthCode,
+        _idToken = data.idToken;
+    */
 
     return {
       'id': '12345',
@@ -28,5 +35,18 @@ class AuthRepositoryImpl implements AuthRepository {
       'email': 'john@example.com',
       'token': 'abcd1234',
     };
+  }
+
+  @override
+  Future requestToken(AuthUserEntity user) async {
+
+    const response = {
+      "access_token": "abcd1234",
+      "refresh_token": "xyz9876"
+    };
+
+    final tokenDTO = TokenDTO.fromJson(response);
+
+    return tokenDTO.toDomain();
   }
 }

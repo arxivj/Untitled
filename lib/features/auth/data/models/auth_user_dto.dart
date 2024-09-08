@@ -1,7 +1,3 @@
-// 서버에서 받은 JSON 데이터를 Dart 객체로 변환하거나, Dart 객체를 JSON으로 변환하는 메서드를 가짐
-// 비지니스 로직이 없고,
-// 외부와의 상호작용을 할 떄 사용
-
 enum AuthUserFields {
   id(key: 'id'),
   email(key: 'email'),

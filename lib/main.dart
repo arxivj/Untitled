@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled/features/auth/presentation/pages/login_page.dart';
-import 'package:untitled/features/auth/presentation/viewmodels/user_session_provider.dart';
 import 'package:untitled/features/chat/presentation/pages/chat.dart';
 import 'package:untitled/features/home/presentation/pages/home.dart';
 import 'package:untitled/features/like/presentation/pages/like.dart';
@@ -16,7 +15,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
-        ChangeNotifierProvider(create: (context) => UserSessionProvider()),
+        // ChangeNotifierProvider(create: (context) => UserSessionProvider()),
       ],
       child: const MyApp(),
     ),
