@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/themes/app_theme.dart';
+import 'package:untitled/themes/extensions.dart';
 
 class SettingsTile extends StatelessWidget {
   final IconData icon;
@@ -17,7 +17,6 @@ class SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = Theme.of(context).extension<AppTheme>()!;
     return Material(
       color: Colors.transparent,
       clipBehavior: Clip.antiAlias,
@@ -26,23 +25,20 @@ class SettingsTile extends StatelessWidget {
         splashFactory: InkRipple.splashFactory,
         onTap: onTap,
         child: ListTile(
-          leading: Icon(
-            icon,
-            color: appTheme.colors.textColor,
-          ),
+          leading: Icon(icon, color: context.colors.textColor),
           title: Text(
             title,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: appTheme.colors.textColor,
-                ),
+            style: context.typographies.bodyLarge.copyWith(
+              color: context.colors.textColor,
+            ),
           ),
           subtitle: subtitle != null
-              ? Text(subtitle!, style: appTheme.typographies.bodySmall)
+              ? Text(subtitle!, style: context.typographies.bodySmall)
               : null,
           trailing: Icon(
             Icons.arrow_forward_ios,
             size: 16,
-            color: appTheme.colors.textColor,
+            color: context.colors.textColor,
           ),
         ),
       ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/core/utils/constants.dart';
+import 'package:untitled/features/auth/presentation/pages/login_page.dart';
 import 'package:untitled/features/settings/widgets/settings_tile.dart';
 import 'package:untitled/themes/app_theme.dart';
-import 'package:untitled/core/utils/constants.dart';
 import 'package:untitled/widgets/shared/card_layout.dart';
 
 class Settings extends StatelessWidget {
@@ -12,10 +13,7 @@ class Settings extends StatelessWidget {
     final appTheme = Theme.of(context).extension<AppTheme>()!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Settings',
-          style: appTheme.typographies.headlineSmall
-        ),
+        title: Text('Settings', style: appTheme.typographies.headlineSmall),
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -80,7 +78,14 @@ class Settings extends StatelessWidget {
                   SettingsTile(
                     icon: Icons.logout_rounded,
                     title: 'Logout',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
