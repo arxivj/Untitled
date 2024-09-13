@@ -1,6 +1,9 @@
-class UserEntity {
-  final String nickName;
+abstract class UserEntity {
   final String email;
+  final String platform;
 
-  UserEntity({required this.nickName, required this.email});
+  UserEntity({
+    required this.email,
+    required this.platform,
+  });
 }

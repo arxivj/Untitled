@@ -1,13 +1,13 @@
 enum PlatformEnum {
-  google(key: 'google', token: 'idToken'),
-  apple(key: 'apple', token: 'authorizationToken');
+  google(id: 'google', token: 'idToken'),
+  apple(id: 'apple', token: 'authorizationToken');
 
-  final String key;
+  final String id;
   final String token;
 
-  const PlatformEnum({required this.key, required this.token});
+  const PlatformEnum({required this.id, required this.token});
 
-  static PlatformEnum fromKey(String key) {
-    return PlatformEnum.values.firstWhere((platform) => platform.key == key);
+  static PlatformEnum fromId(String id) {
+    return PlatformEnum.values.firstWhere((platform) => platform.id == id);
   }
 }

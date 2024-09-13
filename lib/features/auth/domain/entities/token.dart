@@ -1,10 +1,6 @@
 enum TokenType {
-  access(key: 'accessToken'),
-  refresh(key: 'refreshToken');
-
-  final String key;
-
-  const TokenType({required this.key});
+  access,
+  refresh;
 }
 
 class Token {
@@ -17,5 +13,6 @@ class Token {
   });
 
   @override
-  String toString() => token;
+  String toString() => 'Token(token: $token, type: ${type.name})';
+  // String toString() => token;
 }
