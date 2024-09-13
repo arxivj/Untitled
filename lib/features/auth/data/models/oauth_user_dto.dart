@@ -4,13 +4,13 @@ import 'package:untitled/features/auth/data/models/user_dto.dart';
 import 'package:untitled/features/auth/domain/entities/oauth_user_entity.dart';
 
 class OAuthUserDTO extends UserDTO<OAuthUserEntity, OAuthUserDTO> {
-  final String id;
-  final String token;
+  final String oauthId;
+  final String oauthToken;
 
   OAuthUserDTO({
-    required this.id,
+    required this.oauthId,
     required super.email,
-    required this.token,
+    required this.oauthToken,
     required super.platform,
   });
 
@@ -20,9 +20,9 @@ class OAuthUserDTO extends UserDTO<OAuthUserEntity, OAuthUserDTO> {
     final tokenValue = json[tokenFieldName];
 
     return OAuthUserDTO(
-      id: json[AuthUserFields.oAuthId.key],
+      oauthId: json[AuthUserFields.oAuthId.key],
       email: json[AuthUserFields.email.key],
-      token: tokenValue,
+      oauthToken: tokenValue,
       platform: platform.id,
     );
   }
@@ -30,9 +30,9 @@ class OAuthUserDTO extends UserDTO<OAuthUserEntity, OAuthUserDTO> {
   @override
   Map<String, dynamic> toJson() {
     return {
-      AuthUserFields.oAuthId.key: id,
+      AuthUserFields.oAuthId.key: oauthId,
       AuthUserFields.email.key: email,
-      AuthUserFields.oAuthToken.key: token,
+      AuthUserFields.oAuthToken.key: oauthToken,
       AuthUserFields.platform.key: platform,
     };
   }
@@ -40,9 +40,9 @@ class OAuthUserDTO extends UserDTO<OAuthUserEntity, OAuthUserDTO> {
   @override
   OAuthUserDTO fromEntity(OAuthUserEntity entity) {
     return OAuthUserDTO(
-      id: entity.id,
+      oauthId: entity.oauthId,
       email: entity.email,
-      token: entity.token,
+      oauthToken: entity.oauthToken,
       platform: entity.platform,
     );
   }

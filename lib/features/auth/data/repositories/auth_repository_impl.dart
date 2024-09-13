@@ -14,9 +14,9 @@ class AuthRepositoryImpl implements AuthRepository {
     // TODO: 여기에 oauth, emailpassword 로그인 분리해서 각자 리턴해줘야함
     // 이건 oauth 리턴
     return OAuthUserEntity(
-      id: response[AuthUserFields.oAuthId.key],
+      oauthId: response[AuthUserFields.oAuthId.key],
       email: response[AuthUserFields.email.key],
-      token: response[AuthUserFields.oAuthToken.key],
+      oauthToken: response[AuthUserFields.oAuthToken.key],
       platform: platform.id,
     );
   }
@@ -33,9 +33,9 @@ class AuthRepositoryImpl implements AuthRepository {
     */
 
     return {
-      'id': 'google-id',
+      'oauthId': 'google-id',
       'email': 'john@gmail.com',
-      'token': 'google-auth-token',
+      'oauthToken': 'google-auth-token',
     };
   }
 

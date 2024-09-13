@@ -1,8 +1,8 @@
 enum AuthUserFields {
   email(key: 'email'),
   platform(key: 'platform'),
-  oAuthId(key: 'id'),
-  oAuthToken(key: 'token'),
+  oAuthId(key: 'oauthId'),
+  oAuthToken(key: 'oauthToken'),
   password(key: 'password');
 
   final String key;
