@@ -1,20 +1,23 @@
+import 'package:untitled/core/enums/auth_user_fields.dart';
 import 'package:untitled/core/enums/platform_enum.dart';
-import 'package:untitled/features/auth/data/models/auth_user_dto.dart';
 import 'package:untitled/features/auth/data/models/token_dto.dart';
-import 'package:untitled/features/auth/domain/entities/auth_user_entity.dart';
+import 'package:untitled/features/auth/domain/entities/oauth_user_entity.dart';
 import 'package:untitled/features/auth/domain/entities/token.dart';
+import 'package:untitled/features/auth/domain/entities/user_entity.dart';
 import 'package:untitled/features/auth/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   @override
-  Future<AuthUserEntity> login(PlatformEnum platform) async {
+  Future<UserEntity> login(PlatformEnum platform) async {
     final response = await loginWithOAuth(platform);
 
-    return AuthUserEntity(
-      id: response[AuthUserFields.id.name],
-      email: response[AuthUserFields.email.name],
-      token: response[AuthUserFields.token.name],
-      platform: platform.key,
+    // TODO: 여기에 oauth, emailpassword 로그인 분리해서 각자 리턴해줘야함
+    // 이건 oauth 리턴
+    return OAuthUserEntity(
+      id: response[AuthUserFields.oAuthId.key],
+      email: response[AuthUserFields.email.key],
+      token: response[AuthUserFields.oAuthToken.key],
+      platform: platform.id,
     );
   }
 
@@ -37,16 +40,19 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<List<Token>> requestToken(AuthUserEntity user) async {
+  Future<List<Token>> requestToken(UserEntity user) async {
     final response = await serverRequestToken(user);
     final tokenDTO = TokenDTO.fromJson(response);
-    return tokenDTO.toDomain();
+    final List<Token> tokens = tokenDTO.toDomain();
+    return tokens;
   }
 
-  Future<Map<String, dynamic>> serverRequestToken(AuthUserEntity user) async {
+  Future<Map<String, dynamic>> serverRequestToken(UserEntity user) async {
+    // TODO: UserEntity를 상속받은 자식타입 객체들을 fromEntity를 통해 DTO로 변환 후 서버에 전달해야 됨
+    // 서버에서는 platform 필드로 구분해서 인증 후 DB에 저장하고 토큰 발급하고 하면 됨
     const response = {
       "access_token": "abcd1234",
-      "refresh_token": "xyz9876"
+      "refresh_token": "xyz9876",
     };
     return response;
   }
