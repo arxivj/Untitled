@@ -19,6 +19,11 @@ class AuthRepositoryImpl implements AuthRepository {
       oauthToken: response[AuthUserFields.oAuthToken.key],
       platform: platform.id,
     );
+
+    // E/P Login으로 한다면, final response = await loginWithEmailPassword();
+    // return EmailPasswordUserEntity( ... ); 같은 형태가 되겠지
+    // 어차피 UserEntity를 상속하는 Entity들이라 RequestToken을 통해 토큰 응답도 정상적으로 받을 수 있고
+    // 다만, platform 필드를 통해 서버에서 어떤 방식으로 요청하는지 구분해서 인증처리 해야됨
   }
 
   Future<Map<String, dynamic>> loginWithOAuth(PlatformEnum platform) async {
