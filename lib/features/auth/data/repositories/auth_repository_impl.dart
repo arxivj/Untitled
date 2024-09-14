@@ -1,3 +1,5 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:untitled/core/enums/auth_user_fields.dart';
 import 'package:untitled/core/enums/platform_enum.dart';
 import 'package:untitled/features/auth/data/models/token_dto.dart';
@@ -27,20 +29,31 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   Future<Map<String, dynamic>> loginWithOAuth(PlatformEnum platform) async {
-    /*
-    GoogleSignInAccount._(this._googleSignIn, GoogleSignInUserData data)
-      : displayName = data.displayName,
-        email = data.email,
-        id = data.id,
-        photoUrl = data.photoUrl,
-        serverAuthCode = data.serverAuthCode,
-        _idToken = data.idToken;
-    */
+
+    // 간단하게 구글 로그인 구현 (로그인 실패, 네트워크 문제, 사용자 취소 등 예외 처리 필요)
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: [
+        'email',
+        'openid',
+      ],
+      serverClientId: dotenv.env['SERVER_CLIENT_ID'],
+    );
+
+    GoogleSignInAccount? account = await googleSignIn.signIn();
+
+    if (account != null) {
+      GoogleSignInAuthentication auth = await account.authentication;
+      return {
+        'oauthId': account.id,
+        'email': account.email,
+        'oauthToken': auth.idToken,
+      };
+    }
 
     return {
-      'oauthId': 'google-id',
-      'email': 'john@gmail.com',
-      'oauthToken': 'google-auth-token',
+      'oauthId': null,
+      'email': null,
+      'oauthToken': null,
     };
   }
 

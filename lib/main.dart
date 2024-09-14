@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:untitled/features/auth/domain/repositories/auth_repository.dart';
@@ -13,7 +14,12 @@ import 'package:untitled/providers/theme_provider.dart';
 import 'package:untitled/themes/mode/dark_app_theme.dart';
 import 'package:untitled/themes/mode/light_app_theme.dart';
 
-void main() {
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: '.env');
+
   runApp(
     MultiProvider(
       providers: [

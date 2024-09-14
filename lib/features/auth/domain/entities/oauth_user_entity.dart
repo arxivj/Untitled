@@ -10,4 +10,9 @@ class OAuthUserEntity extends UserEntity {
     required this.oauthToken,
     required super.platform,
   });
+
+  @override
+  String toString() {
+    return 'OAuthUserEntity(oauthId: $oauthId, email: $email, oauthToken: $oauthToken, platform: $platform)';
+  }
 }
