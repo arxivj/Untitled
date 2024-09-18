@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/core/enums/platform_enum.dart';
 import 'package:untitled/core/utils/constants.dart';
 import 'package:untitled/features/auth/presentation/pages/login_text_field.dart';
 import 'package:untitled/themes/extensions.dart';
@@ -13,6 +14,12 @@ class TestLoginUi extends StatefulWidget {
 class _TestLoginUiState extends State<TestLoginUi> {
   @override
   Widget build(BuildContext context) {
+
+    Future<void> _handleLogin(PlatformEnum platform, BuildContext context) async {
+
+    }
+
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: context.colors.scaffoldBackground,
@@ -61,7 +68,9 @@ class _TestLoginUiState extends State<TestLoginUi> {
               ),
               Spacing.mediumHeight(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _handleLogin(PlatformEnum.emailPassword, context);
+                },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(

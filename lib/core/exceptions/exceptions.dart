@@ -12,3 +12,5 @@ class ThemeProviderException implements Exception {
     return 'ThemeProviderException: $message';
   }
 }
+
+class UnknownPlatformException implements Exception {}
