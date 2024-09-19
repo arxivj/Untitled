@@ -41,9 +41,13 @@ app.*.map.json
 /android/app/debug/
 /android/app/profile/
 /android/app/release/
+android/app/google-services.json
 
 # iOS related (add if needed)
 ios/Flutter/Flutter.framework
 ios/Flutter/Flutter.podspec
 ios/Pods/
 ios/Podfile
+
+# Environment files
+.env

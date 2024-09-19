@@ -5,4 +5,6 @@ import 'package:untitled/features/auth/domain/entities/user_entity.dart';
 abstract interface class AuthRepository {
   Future<UserEntity> login(PlatformEnum platform);
   Future<List<Token>> requestToken(UserEntity user);
+  Future<void> saveTokens(List<Token> tokens);
+  Future<void> logout(UserEntity user);
 }

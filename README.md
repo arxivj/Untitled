@@ -7,18 +7,21 @@
 ```bash
 lib/
 ├── core/                 # 공통적으로 사용되는 유틸리티, 예외 처리, 유스케이스 등
+│   ├── enums/            # 
 │   ├── exceptions/       # 예외 처리 관련 파일
+│   ├── network/          # 
 │   ├── usecases/         # 유스케이스 (비즈니스 로직)
 │   └── utils/            # 공통 유틸리티 파일
 │
 ├── features/             # 각 기능별 모듈 (기능 중심 구조)
 │   ├── feature_a/        # 기능 A 관련 폴더
 │   │   ├── data/         # 데이터 소스, 모델, 리포지토리
-│   │   │   ├── models/     # ( 폴더명을 dto로 변경할지 고민 중 )
-│   │   │   └── repositories/ # 
+│   │   │   ├── models/         # 외부 시스템(API 등)과 데이터를 주고받기 위한 DTO 정의
+│   │   │   ├── repositories/   # 도메인 레이어에서 정의된 레포지토리 인터페이스를 구현하는 클래스
+│   │   │   └── service/        # API 호출 및 외부 서비스와 통신하는 구체적인 서비스 클래스 정의
+│   │   ├── di/           # 의존성 주입 관련 설정 및 모듈 정의
 │   │   ├── domain/       # 엔티티, 유스케이스 등 비즈니스 로직
 │   │   │   ├── entities/     # 비즈니스 객체를 정의하는 엔티티
-│   │   │   ├── service/
 │   │   │   ├── usecases/     # 유스케이스 정의
 │   │   │   └── repositories/ # 도메인 레이어의 리포지토리 인터페이스
 │   │   ├── presentation/ # UI와 관련된 페이지, 뷰모델
@@ -51,18 +54,25 @@ lib/
 ```
 
 ```bash
-## 추가 설명 (auth를 예시로, 이해를 돕기위해 서버에서 데이터를 가져와 처리하는 흐름을 가정. 실제 구현은 클라이언트에서 서버로 데이터를 전달하는 흐름으로, 예시와 정반대로 구현할 예정)
+## 추가 설명 (auth를 예시로 이해를 돕기 위한 설명. 현재 변경 사항이 많아 추후 완료 후 수정할 예정)
 
 lib/
 ├── features/             # 특정 기능(feature)을 정의하는 폴더 (예: Oauth 인증 기능)
 │   ├── auth/             # 인증 관련 기능을 담당하는 폴더
 │   │   ├── data/         # 실제 데이터 소스(API, 외부 서비스 등)와 상호작용하는 계층
 │   │   │   ├── models/        # 서버에서 받은 데이터를 클라이언트에서 사용하기 위한 DTO를 정의
-│   │   │   │   └── auth_user_model.dart  # 서버로부터 받은 JSON 데이터를 DTO로 변환하여 외부 데이터와 상호작용
+│   │   │   │   ├── email_password_user_dto.dart  # 이메일/비밀번호 로그인 관련 데이터를 전송하기 위한 DTO
+│   │   │   │   ├── oauth_user_dto.dart           # OAuth 로그인 관련 데이터를 전송하기 위한 DTO
+│   │   │   │   ├── token_dto.dart                # 인증 토큰 관련 데이터를 전송하기 위한 DTO
+│   │   │   │   └── user_dto.dart                 # 일반적인 사용자 정보를 담은 DTO
 │   │   │   ├── repositories/  # 데이터 소스와 상호작용하여 데이터를 가져오고, DTO를 Entity로 변환하여 도메인 레이어로 전달
-│   │   │   │   ├── auth_repository_impl.dart        # 실제 레포지토리 구현. 서버에서 데이터를 가져오거나 전송하며, DTO를 Entity로 변환하여 도메인 레이어에 전달
-│   │   │   │   ├── apple_auth.dart        # X
-│   │   │   │   └── google_auth.dart       # X
+│   │   │   │   └── auth_repository_impl.dart        # 실제 레포지토리 구현. 서버에서 데이터를 가져오거나 전송하며, DTO를 Entity로 변환하여 도메인 레이어에 전달
+│   │   │   ├── service/       # API 호출 및 외부 서비스와 통신하는 구체적인 서비스 클래스 정의
+│   │   │   │   ├── email_password_login_service.dart  # 이메일/비밀번호 로그인 처리 로직을 담은 서비스 클래스
+│   │   │   │   ├── oauth_login_service.dart           # OAuth 로그인 처리 로직을 담은 서비스 클래스
+│   │   │   │   └── token_service.dart                 # 토큰을 처리하고 API 요청을 관리하는 서비스 클래스
+│   │   ├── di/
+│   │   │   └── auth_module.dart    # Auth 관련 클래스들의 DI 설정을 담당 (MultiProvider에서 사용할 의존성 리스트를 관리)
 │   │   ├── domain/         # 애플리케이션의 비즈니스 로직과 규칙을 처리하는 계층
 │   │   │   ├── entities/      # 도메인 레이어에서 사용하는 데이터 구조를 정의 (비즈니스 로직에 사용되는 엔티티)
 │   │   │   │   └── auth_user_entity.dart  # 레포지토리에서 변환된 DTO를 엔티티로 변환하여 도메인 로직에서 사용

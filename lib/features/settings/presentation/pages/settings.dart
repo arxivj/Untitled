@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:untitled/core/enums/token_enum.dart';
 import 'package:untitled/core/utils/constants.dart';
+import 'package:untitled/features/auth/data/service/user_service.dart';
+import 'package:untitled/features/auth/data/storage/token_storage.dart';
+import 'package:untitled/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:untitled/features/auth/presentation/pages/login_page.dart';
 import 'package:untitled/features/settings/widgets/settings_tile.dart';
 import 'package:untitled/themes/app_theme.dart';
@@ -8,9 +13,34 @@ import 'package:untitled/widgets/shared/card_layout.dart';
 class Settings extends StatelessWidget {
   const Settings({super.key});
 
+  Future<void> _handleLogout(BuildContext context) async {
+    final logoutUseCase = Provider.of<LogoutUseCase>(context, listen: false);
+    final tokenStorage = Provider.of<TokenStorage>(context, listen: false);
+    final userService = Provider.of<UserService>(context, listen: false);
+
+    final tokens = await tokenStorage.loadTokens();
+    final accessToken =
+        tokens.firstWhere((token) => token.type == TokenEnum.accessToken);
+
+    final user = await userService.getUserByAccessToken(accessToken);
+
+    await logoutUseCase(LogoutParams(user: user));
+    _navigateToLogin(context);
+  }
+
+  void _navigateToLogin(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final appTheme = Theme.of(context).extension<AppTheme>()!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings', style: appTheme.typographies.headlineSmall),
@@ -79,12 +109,7 @@ class Settings extends StatelessWidget {
                     icon: Icons.logout_rounded,
                     title: 'Logout',
                     onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ),
-                      );
+                      _handleLogout(context);
                     },
                   ),
                 ],

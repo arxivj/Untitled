@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:untitled/features/auth/data/service/email_password_login_service.dart';
+import 'package:untitled/features/auth/data/service/oauth_login_service.dart';
+import 'package:untitled/features/auth/data/service/token_service.dart';
+import 'package:untitled/features/auth/di/auth_module.dart';
 import 'package:untitled/features/auth/domain/repositories/auth_repository.dart';
 import 'package:untitled/features/auth/domain/usecases/login_usecase.dart';
 import 'package:untitled/features/auth/presentation/pages/login_page.dart';
@@ -13,18 +18,17 @@ import 'package:untitled/providers/theme_provider.dart';
 import 'package:untitled/themes/mode/dark_app_theme.dart';
 import 'package:untitled/themes/mode/light_app_theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: '.env');
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         // ChangeNotifierProvider(create: (context) => UserSessionProvider()),
-        Provider<AuthRepository>(create: (context) => AuthRepositoryImpl()),
-        Provider<LoginUseCase>(
-          create: (context) => LoginUseCase(
-            Provider.of<AuthRepository>(context, listen: false),
-          ),
-        ),
+        ...AuthModule.providers,
       ],
       child: const MyApp(),
     ),

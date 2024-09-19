@@ -24,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final loginUseCase = Provider.of<LoginUseCase>(context, listen: false);
-
       final tokens = await loginUseCase(LoginParams(platform: platform));
       setState(() {
         _message = '로그인 성공! 받은 토큰: $tokens';
@@ -36,6 +35,8 @@ class _LoginPageState extends State<LoginPage> {
         MaterialPageRoute(builder: (context) => const MainScreen()),
       );
     } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('로그인 실패: $e')));
       setState(() {
         _message = '로그인 실패: $e';
       });

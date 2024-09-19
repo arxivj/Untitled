@@ -1,9 +1,10 @@
 enum PlatformEnum {
   google(id: 'google', token: 'idToken'),
-  apple(id: 'apple', token: 'authorizationToken');
+  apple(id: 'apple', token: 'authorizationToken'),
+  emailPassword(id: 'emailPassword', token: null);
 
   final String id;
-  final String token;
+  final String? token;
 
   const PlatformEnum({required this.id, required this.token});
 

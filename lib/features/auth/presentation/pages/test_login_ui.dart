@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:untitled/core/enums/platform_enum.dart';
 import 'package:untitled/core/utils/constants.dart';
+import 'package:untitled/features/auth/domain/usecases/login_usecase.dart';
 import 'package:untitled/features/auth/presentation/pages/login_text_field.dart';
+import 'package:untitled/main.dart';
 import 'package:untitled/themes/extensions.dart';
 
 class TestLoginUi extends StatefulWidget {
@@ -11,8 +15,44 @@ class TestLoginUi extends StatefulWidget {
 }
 
 class _TestLoginUiState extends State<TestLoginUi> {
+  bool _isLoading = false;
+  String? _message;
+
+  Future<void> _handleLogin(PlatformEnum platform, BuildContext context) async {
+    setState(() {
+      _isLoading = true;
+      _message = null;
+    });
+
+    try {
+      final loginUseCase = Provider.of<LoginUseCase>(context, listen: false);
+      final tokens = await loginUseCase(LoginParams(platform: platform));
+      setState(() {
+        _message = '로그인 성공! 받은 토큰: $tokens';
+      });
+
+      await Future.delayed(const Duration(seconds: 2));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MainScreen()),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('로그인 실패: $e')));
+      setState(() {
+        _message = '로그인 실패: $e';
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: context.colors.scaffoldBackground,
@@ -61,7 +101,9 @@ class _TestLoginUiState extends State<TestLoginUi> {
               ),
               Spacing.mediumHeight(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _handleLogin(PlatformEnum.emailPassword, context);
+                },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
