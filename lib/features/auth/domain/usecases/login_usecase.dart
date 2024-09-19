@@ -12,13 +12,13 @@ class LoginParams {
 class LoginUseCase extends UseCase<List<Token>, LoginParams> {
   final AuthRepository repository;
 
-  LoginUseCase(this.repository);
+  LoginUseCase({required this.repository});
 
   @override
   Future<List<Token>> call(LoginParams params) async {
     final authUser = await repository.login(params.platform);
     final List<Token> tokens = await repository.requestToken(authUser);
-
+    await repository.saveTokens(tokens);
     return tokens;
   }
 }

@@ -1,11 +1,8 @@
-enum TokenType {
-  access,
-  refresh;
-}
+import 'package:untitled/core/enums/token_enum.dart';
 
 class Token {
   final String token;
-  final TokenType type;
+  final TokenEnum type;
 
   Token({
     required this.token,

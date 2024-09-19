@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:untitled/core/enums/token_enum.dart';
 import 'package:untitled/features/auth/data/models/token_dto.dart';
 import 'package:untitled/features/auth/domain/entities/token.dart';
 import 'package:untitled/features/auth/domain/entities/user_entity.dart';
@@ -18,8 +19,8 @@ class TokenService {
     if (response.statusCode == HttpStatus.ok) {
       final Map<String, dynamic> responseData = jsonDecode(response.body);
       return {
-        'access_token': responseData['accessToken'],
-        'refresh_token': responseData['refreshToken'],
+        TokenEnum.accessToken.jsonKey: responseData['accessToken'],
+        TokenEnum.refreshToken.jsonKey: responseData['refreshToken'],
       };
     } else {
       throw Exception('Failed to authenticate with server');

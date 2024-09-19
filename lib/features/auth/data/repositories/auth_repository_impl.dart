@@ -4,6 +4,7 @@ import 'package:untitled/core/exceptions/exceptions.dart';
 import 'package:untitled/features/auth/data/service/email_password_login_service.dart';
 import 'package:untitled/features/auth/data/service/oauth_login_service.dart';
 import 'package:untitled/features/auth/data/service/token_service.dart';
+import 'package:untitled/features/auth/data/storage/token_storage.dart';
 import 'package:untitled/features/auth/domain/entities/email_password_user_entity.dart';
 import 'package:untitled/features/auth/domain/entities/oauth_user_entity.dart';
 import 'package:untitled/features/auth/domain/entities/token.dart';
@@ -14,11 +15,13 @@ class AuthRepositoryImpl implements AuthRepository {
   final OAuthLoginService oAuthLoginService;
   final EmailPasswordLoginService emailPasswordLoginService;
   final TokenService tokenService;
+  final TokenStorage tokenStorage;
 
   AuthRepositoryImpl({
     required this.oAuthLoginService,
     required this.emailPasswordLoginService,
     required this.tokenService,
+    required this.tokenStorage,
   });
 
   @override
@@ -61,5 +64,16 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<List<Token>> requestToken(UserEntity user) async {
     final response = await tokenService.requestTokenFromServer(user);
     return tokenService.parseTokens(response);
+  }
+
+  @override
+  Future<void> saveTokens(List<Token> tokens) async {
+    tokenStorage.saveTokens(tokens);
+  }
+
+
+  @override
+  Future<void> logout(UserEntity user) async{
+    print('${user.platform}, ${user.email}');
   }
 }

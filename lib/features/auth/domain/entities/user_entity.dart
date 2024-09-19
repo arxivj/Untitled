@@ -1,6 +1,6 @@
 import 'package:untitled/core/enums/auth_user_fields.dart';
 
-abstract class UserEntity {
+class UserEntity {
   final String email;
   final String platform;
 
