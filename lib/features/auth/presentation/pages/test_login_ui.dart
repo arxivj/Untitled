@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled/core/enums/platform_enum.dart';
+import 'package:untitled/core/enums/auth_platform.dart';
 import 'package:untitled/core/utils/constants.dart';
 import 'package:untitled/features/auth/domain/usecases/login_usecase.dart';
 import 'package:untitled/features/auth/presentation/pages/login_text_field.dart';
@@ -18,7 +18,7 @@ class _TestLoginUiState extends State<TestLoginUi> {
   bool _isLoading = false;
   String? _message;
 
-  Future<void> _handleLogin(PlatformEnum platform, BuildContext context) async {
+  Future<void> _handleLogin(AuthPlatform platform, BuildContext context) async {
     setState(() {
       _isLoading = true;
       _message = null;
@@ -102,7 +102,7 @@ class _TestLoginUiState extends State<TestLoginUi> {
               Spacing.mediumHeight(),
               ElevatedButton(
                 onPressed: () {
-                  _handleLogin(PlatformEnum.emailPassword, context);
+                  _handleLogin(AuthPlatform.emailPassword, context);
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14),

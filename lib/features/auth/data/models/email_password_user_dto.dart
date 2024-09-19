@@ -1,4 +1,4 @@
-import 'package:untitled/core/enums/auth_user_fields.dart';
+import 'package:untitled/core/enums/auth_user_field.dart';
 import 'package:untitled/features/auth/data/models/user_dto.dart';
 import 'package:untitled/features/auth/domain/entities/email_password_user_entity.dart';
 
@@ -14,9 +14,9 @@ class EmailPasswordUserDTO extends UserDTO<EmailPasswordUserEntity, EmailPasswor
   @override
   Map<String, dynamic> toJson() {
     return {
-      AuthUserFields.email.key: email,
-      AuthUserFields.password.key: password,
-      AuthUserFields.platform.key: platform,
+      AuthUserField.email.jsonKey: email,
+      AuthUserField.password.jsonKey: password,
+      AuthUserField.platform.jsonKey: platform,
     };
   }
 

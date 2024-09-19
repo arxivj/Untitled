@@ -1,8 +1,8 @@
-import 'package:untitled/core/enums/token_enum.dart';
+import 'package:untitled/core/enums/auth_token_type.dart';
 
 class Token {
   final String token;
-  final TokenEnum type;
+  final AuthTokenType type;
 
   Token({
     required this.token,

@@ -1,5 +1,5 @@
-import 'package:untitled/core/enums/auth_user_fields.dart';
-import 'package:untitled/core/enums/platform_enum.dart';
+import 'package:untitled/core/enums/auth_platform.dart';
+import 'package:untitled/core/enums/auth_user_field.dart';
 import 'package:untitled/features/auth/data/models/user_dto.dart';
 import 'package:untitled/features/auth/domain/entities/oauth_user_entity.dart';
 
@@ -15,25 +15,27 @@ class OAuthUserDTO extends UserDTO<OAuthUserEntity, OAuthUserDTO> {
   });
 
   factory OAuthUserDTO.fromJson(
-      Map<String, dynamic> json, PlatformEnum platform) {
-    final tokenFieldName = platform.token;
+    Map<String, dynamic> json,
+    AuthPlatform platform,
+  ) {
+    final tokenFieldName = platform.tokenKey;
     final tokenValue = json[tokenFieldName];
 
     return OAuthUserDTO(
-      oauthId: json[AuthUserFields.oAuthId.key],
-      email: json[AuthUserFields.email.key],
+      oauthId: json[AuthUserField.oAuthId.jsonKey],
+      email: json[AuthUserField.email.jsonKey],
       oauthToken: tokenValue,
-      platform: platform.id,
+      platform: platform.platformId,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return {
-      AuthUserFields.oAuthId.key: oauthId,
-      AuthUserFields.email.key: email,
-      AuthUserFields.oAuthToken.key: oauthToken,
-      AuthUserFields.platform.key: platform,
+      AuthUserField.oAuthId.jsonKey: oauthId,
+      AuthUserField.email.jsonKey: email,
+      AuthUserField.oAuthToken.jsonKey: oauthToken,
+      AuthUserField.platform.jsonKey: platform,
     };
   }
 

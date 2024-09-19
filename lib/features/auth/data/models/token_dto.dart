@@ -1,4 +1,4 @@
-import 'package:untitled/core/enums/token_enum.dart';
+import 'package:untitled/core/enums/auth_token_type.dart';
 import 'package:untitled/features/auth/domain/entities/token.dart';
 
 class TokenDTO {
@@ -12,15 +12,15 @@ class TokenDTO {
 
   factory TokenDTO.fromJson(Map<String, dynamic> json) {
     return TokenDTO(
-      accessToken: json[TokenEnum.accessToken.jsonKey],
-      refreshToken: json[TokenEnum.refreshToken.jsonKey],
+      accessToken: json[AuthTokenType.accessToken.jsonKey],
+      refreshToken: json[AuthTokenType.refreshToken.jsonKey],
     );
   }
 
   List<Token> toDomain() {
     return [
-      Token(token: accessToken, type: TokenEnum.accessToken),
-      Token(token: refreshToken, type: TokenEnum.refreshToken),
+      Token(token: accessToken, type: AuthTokenType.accessToken),
+      Token(token: refreshToken, type: AuthTokenType.refreshToken),
     ];
   }
 }

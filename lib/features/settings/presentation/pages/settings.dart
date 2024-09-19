@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled/core/enums/token_enum.dart';
+import 'package:untitled/core/enums/auth_token_type.dart';
 import 'package:untitled/core/utils/constants.dart';
 import 'package:untitled/features/auth/data/service/user_service.dart';
 import 'package:untitled/features/auth/data/storage/token_storage.dart';
@@ -20,7 +20,7 @@ class Settings extends StatelessWidget {
 
     final tokens = await tokenStorage.loadTokens();
     final accessToken =
-        tokens.firstWhere((token) => token.type == TokenEnum.accessToken);
+        tokens.firstWhere((token) => token.type == AuthTokenType.accessToken);
 
     final user = await userService.getUserByAccessToken(accessToken);
 

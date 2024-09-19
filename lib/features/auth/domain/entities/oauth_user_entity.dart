@@ -1,4 +1,4 @@
-import 'package:untitled/core/enums/auth_user_fields.dart';
+import 'package:untitled/core/enums/auth_user_field.dart';
 import 'package:untitled/features/auth/domain/entities/user_entity.dart';
 
 class OAuthUserEntity extends UserEntity {
@@ -6,10 +6,10 @@ class OAuthUserEntity extends UserEntity {
   final String oauthToken;
 
   OAuthUserEntity({
-    required this.oauthId,
     required super.email,
-    required this.oauthToken,
     required super.platform,
+    required this.oauthId,
+    required this.oauthToken,
   });
 
   @override
@@ -21,8 +21,8 @@ class OAuthUserEntity extends UserEntity {
   Map<String, dynamic> toJson() {
     final json = super.toJson();
     json.addAll({
-      AuthUserFields.oAuthId.key: oauthId,
-      AuthUserFields.oAuthToken.key: oauthToken,
+      AuthUserField.oAuthId.jsonKey: oauthId,
+      AuthUserField.oAuthToken.jsonKey: oauthToken,
     });
     return json;
   }

@@ -1,5 +1,5 @@
-import 'package:untitled/core/enums/auth_user_fields.dart';
-import 'package:untitled/core/enums/platform_enum.dart';
+import 'package:untitled/core/enums/auth_user_field.dart';
+import 'package:untitled/core/enums/auth_platform.dart';
 import 'package:untitled/core/exceptions/exceptions.dart';
 import 'package:untitled/features/auth/data/service/email_password_login_service.dart';
 import 'package:untitled/features/auth/data/service/oauth_login_service.dart';
@@ -25,36 +25,37 @@ class AuthRepositoryImpl implements AuthRepository {
   });
 
   @override
-  Future<UserEntity> login(PlatformEnum platform) async {
+  Future<UserEntity> login(AuthPlatform platform) async {
     final response = await _loginBasedOnPlatform(platform);
     return _createUserEntity(platform, response);
   }
 
-  Future<Map<String, dynamic>> _loginBasedOnPlatform(PlatformEnum platform) {
-    if (platform == PlatformEnum.apple || platform == PlatformEnum.google) {
+  Future<Map<String, dynamic>> _loginBasedOnPlatform(AuthPlatform platform) {
+    if (platform == AuthPlatform.apple || platform == AuthPlatform.google) {
       return oAuthLoginService.loginWithOAuth(platform);
-    } else if (platform == PlatformEnum.emailPassword) {
+    } else if (platform == AuthPlatform.emailPassword) {
       return emailPasswordLoginService.loginWithEmailPassword();
+    } else {
+      return Future.error(UnknownPlatformException());
     }
-    throw UnknownPlatformException;
   }
 
   UserEntity _createUserEntity(
-    PlatformEnum platform,
+    AuthPlatform platform,
     Map<String, dynamic> response,
   ) {
-    if (platform == PlatformEnum.apple || platform == PlatformEnum.google) {
+    if (platform == AuthPlatform.apple || platform == AuthPlatform.google) {
       return OAuthUserEntity(
-        oauthId: response[AuthUserFields.oAuthId.key],
-        email: response[AuthUserFields.email.key],
-        oauthToken: response[AuthUserFields.oAuthToken.key],
-        platform: platform.id,
+        email: response[AuthUserField.email.jsonKey],
+        platform: response[AuthUserField.platform.jsonKey],
+        oauthId: response[AuthUserField.oAuthId.jsonKey],
+        oauthToken: response[AuthUserField.oAuthToken.jsonKey],
       );
-    } else if (platform == PlatformEnum.emailPassword) {
+    } else if (platform == AuthPlatform.emailPassword) {
       return EmailPasswordUserEntity(
-        email: response[AuthUserFields.email.key],
-        password: response[AuthUserFields.password.key],
-        platform: platform.id,
+        email: response[AuthUserField.email.jsonKey],
+        platform: response[AuthUserField.platform.jsonKey],
+        password: response[AuthUserField.password.jsonKey],
       );
     }
     throw UnknownPlatformException;
@@ -71,9 +72,8 @@ class AuthRepositoryImpl implements AuthRepository {
     tokenStorage.saveTokens(tokens);
   }
 
-
   @override
-  Future<void> logout(UserEntity user) async{
+  Future<void> logout(UserEntity user) async {
     print('${user.platform}, ${user.email}');
   }
 }

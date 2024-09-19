@@ -1,4 +1,4 @@
-import 'package:untitled/core/enums/auth_user_fields.dart';
+import 'package:untitled/core/enums/auth_user_field.dart';
 import 'package:untitled/features/auth/domain/entities/user_entity.dart';
 
 class EmailPasswordUserEntity extends UserEntity {
@@ -6,15 +6,15 @@ class EmailPasswordUserEntity extends UserEntity {
 
   EmailPasswordUserEntity({
     required super.email,
-    required this.password,
     required super.platform,
+    required this.password,
   });
 
   @override
   Map<String, dynamic> toJson() {
     final json = super.toJson();
     json.addAll({
-      AuthUserFields.password.key: password,
+      AuthUserField.password.jsonKey: password,
     });
     return json;
   }

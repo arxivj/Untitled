@@ -1,4 +1,4 @@
-import 'package:untitled/core/enums/auth_user_fields.dart';
+import 'package:untitled/core/enums/auth_user_field.dart';
 
 class UserEntity {
   final String email;
@@ -11,8 +11,8 @@ class UserEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      AuthUserFields.email.key: email,
-      AuthUserFields.platform.key: platform,
+      AuthUserField.email.jsonKey: email,
+      AuthUserField.platform.jsonKey: platform,
     };
   }
 }

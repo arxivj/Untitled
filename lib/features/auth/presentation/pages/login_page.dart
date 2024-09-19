@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled/core/enums/platform_enum.dart';
+import 'package:untitled/core/enums/auth_platform.dart';
 import 'package:untitled/features/auth/domain/usecases/login_usecase.dart';
 import 'package:untitled/features/auth/presentation/pages/test_login_ui.dart';
 import 'package:untitled/main.dart';
@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
   String? _message;
 
-  Future<void> _handleLogin(PlatformEnum platform, BuildContext context) async {
+  Future<void> _handleLogin(AuthPlatform platform, BuildContext context) async {
     setState(() {
       _isLoading = true;
       _message = null;
@@ -57,13 +57,13 @@ class _LoginPageState extends State<LoginPage> {
             TextButton(
               onPressed: _isLoading
                   ? null
-                  : () => _handleLogin(PlatformEnum.google, context),
+                  : () => _handleLogin(AuthPlatform.google, context),
               child: const Text('Google'),
             ),
             TextButton(
               onPressed: _isLoading
                   ? null
-                  : () => _handleLogin(PlatformEnum.apple, context),
+                  : () => _handleLogin(AuthPlatform.apple, context),
               child: const Text('Apple'),
             ),
             OutlinedButton(
