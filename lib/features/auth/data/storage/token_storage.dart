@@ -9,8 +9,8 @@ class TokenStorage {
     final accessToken = tokens.firstWhere((token) => token.type == TokenEnum.accessToken);
     final refreshToken = tokens.firstWhere((token) => token.type == TokenEnum.refreshToken);
 
-    await prefs.setString('access_token', accessToken.token);
-    await prefs.setString('refresh_token', refreshToken.token);
+    await prefs.setString(TokenEnum.accessToken.jsonKey, accessToken.token);
+    await prefs.setString(TokenEnum.refreshToken.jsonKey, refreshToken.token);
   }
 
   Future<List<Token>> loadTokens() async {

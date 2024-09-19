@@ -71,6 +71,7 @@ lib/
 │   │   │   │   ├── email_password_login_service.dart  # 이메일/비밀번호 로그인 처리 로직을 담은 서비스 클래스
 │   │   │   │   ├── oauth_login_service.dart           # OAuth 로그인 처리 로직을 담은 서비스 클래스
 │   │   │   │   └── token_service.dart                 # 토큰을 처리하고 API 요청을 관리하는 서비스 클래스
+│   │   │   ├── storage/       # 
 │   │   ├── di/
 │   │   │   └── auth_module.dart    # Auth 관련 클래스들의 DI 설정을 담당 (MultiProvider에서 사용할 의존성 리스트를 관리)
 │   │   ├── domain/         # 애플리케이션의 비즈니스 로직과 규칙을 처리하는 계층
