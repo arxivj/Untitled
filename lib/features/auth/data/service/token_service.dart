@@ -12,10 +12,7 @@ class TokenService {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: jsonEncode({
-        'platform': user.platform,
-        'email': user.email,
-      }),
+      body: jsonEncode(user.toJson()),
     );
 
     if (response.statusCode == HttpStatus.ok) {
