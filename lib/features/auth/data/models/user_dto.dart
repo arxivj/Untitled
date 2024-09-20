@@ -1,6 +1,6 @@
-import 'package:untitled/features/auth/domain/entities/user_entity.dart';
+import 'package:untitled/core/enums/auth_user_field.dart';
 
-abstract class UserDTO<T extends UserEntity, U extends UserDTO<T,U>> { // recursive generic, 자식 클래스에서 재정의한 메서드의 리턴타입을 명확하게 정의하기 위해 사용
+abstract class UserDTO {
   final String email;
   final String platform;
 
@@ -9,7 +9,10 @@ abstract class UserDTO<T extends UserEntity, U extends UserDTO<T,U>> { // recurs
     required this.platform,
   });
 
-  Map<String, dynamic> toJson();
-
-  U fromEntity(T entity);
+  Map<String, dynamic> toJson() {
+    return {
+      AuthUserField.email.jsonKey: email,
+      AuthUserField.platform.jsonKey: platform,
+    };
+  }
 }
