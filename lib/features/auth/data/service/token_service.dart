@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:untitled/features/auth/data/models/token_dto.dart';
+import 'package:untitled/features/auth/data/models/user_dto.dart';
 import 'package:untitled/features/auth/domain/entities/token.dart';
-import 'package:untitled/features/auth/domain/entities/user_entity.dart';
 
 class TokenService {
-  Future<Map<String, dynamic>> requestTokenFromServer(UserEntity user) async {
+  Future<Map<String, dynamic>> requestTokenFromServer(UserDTO user) async {
     final Map<String, dynamic> credentialsMap = user.toJson();
     final response = await http.post(
-      Uri.parse('http://192.168.0.36:8080/api/auth/login'),
+      Uri.parse('http://192.168.0.36:8080/api/auth/token'),
       headers: {
         'Content-Type': 'application/json',
       },

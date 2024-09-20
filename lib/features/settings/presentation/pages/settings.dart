@@ -25,7 +25,6 @@ class Settings extends StatelessWidget {
     final user = await userService.getUserByAccessToken(accessToken);
 
     await logoutUseCase(LogoutParams(user: user));
-    _navigateToLogin(context);
   }
 
   void _navigateToLogin(BuildContext context) {
@@ -108,8 +107,11 @@ class Settings extends StatelessWidget {
                   SettingsTile(
                     icon: Icons.logout_rounded,
                     title: 'Logout',
-                    onTap: () {
-                      _handleLogout(context);
+                    onTap: () async {
+                      await _handleLogout(context);
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        _navigateToLogin(context);
+                      });
                     },
                   ),
                 ],

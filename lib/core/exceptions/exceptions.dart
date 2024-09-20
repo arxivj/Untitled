@@ -14,3 +14,5 @@ class ThemeProviderException implements Exception {
 }
 
 class UnknownPlatformException implements Exception {}
+
+class LogoutFailedException implements Exception {}

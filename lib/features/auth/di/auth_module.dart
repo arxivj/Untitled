@@ -2,6 +2,7 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:untitled/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:untitled/features/auth/data/service/email_password_login_service.dart';
+import 'package:untitled/features/auth/data/service/logout_service.dart';
 import 'package:untitled/features/auth/data/service/oauth_login_service.dart';
 import 'package:untitled/features/auth/data/service/token_service.dart';
 import 'package:untitled/features/auth/data/service/user_service.dart';
@@ -24,6 +25,7 @@ class AuthModule {
         oAuthLoginService: OAuthLoginService(),
         tokenService: Provider.of<TokenService>(context, listen: false),
         tokenStorage: Provider.of<TokenStorage>(context, listen: false),
+        logoutService: LogoutService(),
       ),
     ),
     Provider<LoginUseCase>(
