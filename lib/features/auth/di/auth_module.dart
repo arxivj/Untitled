@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:untitled/features/auth/data/mappers/user_mapper.dart';
 import 'package:untitled/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:untitled/features/auth/data/service/email_password_login_service.dart';
 import 'package:untitled/features/auth/data/service/logout_service.dart';
@@ -7,6 +8,7 @@ import 'package:untitled/features/auth/data/service/oauth_login_service.dart';
 import 'package:untitled/features/auth/data/service/token_service.dart';
 import 'package:untitled/features/auth/data/service/user_service.dart';
 import 'package:untitled/features/auth/data/storage/token_storage.dart';
+import 'package:untitled/features/auth/domain/mappers/user_mapper.dart';
 import 'package:untitled/features/auth/domain/repositories/auth_repository.dart';
 import 'package:untitled/features/auth/domain/usecases/login_usecase.dart';
 import 'package:untitled/features/auth/domain/usecases/logout_usecase.dart';
@@ -19,13 +21,18 @@ class AuthModule {
     Provider<TokenService>(create: (_) => TokenService()),
     Provider<TokenStorage>(create: (_) => TokenStorage()),
     Provider<UserService>(create: (_) => UserService()),
+    Provider<OAuthLoginService>(create: (_) => OAuthLoginService()),
+    Provider<LogoutService>(create: (_) => LogoutService()),
+    Provider<UserMapper>(create: (_) => UserMapperImpl()),
     Provider<AuthRepository>(
       create: (context) => AuthRepositoryImpl(
-        emailPasswordLoginService: EmailPasswordLoginService(),
-        oAuthLoginService: OAuthLoginService(),
+        oAuthLoginService:
+            Provider.of<OAuthLoginService>(context, listen: false),
         tokenService: Provider.of<TokenService>(context, listen: false),
         tokenStorage: Provider.of<TokenStorage>(context, listen: false),
-        logoutService: LogoutService(),
+        logoutService: Provider.of<LogoutService>(context, listen: false),
+        userService: Provider.of<UserService>(context, listen: false),
+        userMapper: Provider.of<UserMapper>(context, listen: false),
       ),
     ),
     Provider<LoginUseCase>(

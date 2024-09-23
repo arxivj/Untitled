@@ -15,16 +15,7 @@ class Settings extends StatelessWidget {
 
   Future<void> _handleLogout(BuildContext context) async {
     final logoutUseCase = Provider.of<LogoutUseCase>(context, listen: false);
-    final tokenStorage = Provider.of<TokenStorage>(context, listen: false);
-    final userService = Provider.of<UserService>(context, listen: false);
-
-    final tokens = await tokenStorage.loadTokens();
-    final accessToken =
-        tokens.firstWhere((token) => token.type == AuthTokenType.accessToken);
-
-    final user = await userService.getUserByAccessToken(accessToken);
-
-    await logoutUseCase(LogoutParams(user: user));
+    await logoutUseCase();
   }
 
   void _navigateToLogin(BuildContext context) {

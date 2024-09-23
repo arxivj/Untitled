@@ -6,5 +6,6 @@ abstract interface class AuthRepository {
   Future<UserEntity> login(AuthPlatform platform);
   Future<List<Token>> requestToken(UserEntity user);
   Future<void> saveTokens(List<Token> tokens);
-  Future<void> logout(UserEntity user);
+  Future<UserEntity> getUserInfo();
+  Future<void> logout();
 }

@@ -6,11 +6,4 @@ class EmailPasswordUserEntity extends UserEntity {
     required super.email,
     required super.platform,
   });
-
-  @override
-  Map<String, dynamic> toJson() {
-    final json = super.toJson();
-    json.addAll({});
-    return json;
-  }
 }

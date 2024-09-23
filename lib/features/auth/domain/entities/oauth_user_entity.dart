@@ -16,14 +16,4 @@ class OAuthUserEntity extends UserEntity {
   String toString() {
     return 'OAuthUserEntity(oauthId: $oauthId, email: $email, oauthToken: $oauthToken, platform: $platform)';
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    final json = super.toJson();
-    json.addAll({
-      AuthUserField.oAuthId.jsonKey: oauthId,
-      AuthUserField.oAuthToken.jsonKey: oauthToken,
-    });
-    return json;
-  }
 }
