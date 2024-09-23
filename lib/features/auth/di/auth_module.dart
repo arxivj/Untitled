@@ -1,6 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-import 'package:untitled/features/auth/data/mappers/user_mapper.dart';
+import 'package:untitled/features/auth/data/mappers/user_mapper_impl.dart';
 import 'package:untitled/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:untitled/features/auth/data/service/email_password_login_service.dart';
 import 'package:untitled/features/auth/data/service/logout_service.dart';
