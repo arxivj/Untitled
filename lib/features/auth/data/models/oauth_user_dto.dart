@@ -3,7 +3,7 @@ import 'package:untitled/features/auth/data/models/user_dto.dart';
 
 class OAuthUserDTO extends UserDTO {
   final String oauthId;
-  final String oauthToken;
+  final String? oauthToken;
 
   OAuthUserDTO({
     required super.email,

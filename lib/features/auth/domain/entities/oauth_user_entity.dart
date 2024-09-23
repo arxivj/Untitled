@@ -3,7 +3,7 @@ import 'package:untitled/features/auth/domain/entities/user_entity.dart';
 
 class OAuthUserEntity extends UserEntity {
   final String oauthId;
-  final String oauthToken;
+  final String? oauthToken;
 
   OAuthUserEntity({
     required super.email,

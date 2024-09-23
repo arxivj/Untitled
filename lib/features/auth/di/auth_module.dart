@@ -22,12 +22,13 @@ class AuthModule {
     Provider<TokenStorage>(create: (_) => TokenStorage()),
     Provider<UserService>(create: (_) => UserService()),
     Provider<OAuthLoginService>(create: (_) => OAuthLoginService()),
+    Provider<EmailPasswordLoginService>( create: (_) => EmailPasswordLoginService()),
     Provider<LogoutService>(create: (_) => LogoutService()),
     Provider<UserMapper>(create: (_) => UserMapperImpl()),
     Provider<AuthRepository>(
       create: (context) => AuthRepositoryImpl(
-        oAuthLoginService:
-            Provider.of<OAuthLoginService>(context, listen: false),
+        oAuthLoginService: Provider.of<OAuthLoginService>(context, listen: false),
+        emailPasswordLoginService: Provider.of<EmailPasswordLoginService>(context, listen: false),
         tokenService: Provider.of<TokenService>(context, listen: false),
         tokenStorage: Provider.of<TokenStorage>(context, listen: false),
         logoutService: Provider.of<LogoutService>(context, listen: false),

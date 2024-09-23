@@ -6,7 +6,6 @@ import 'package:untitled/features/auth/data/models/email_password_user_dto.dart'
 import 'package:untitled/features/auth/data/models/oauth_user_dto.dart';
 import 'package:untitled/features/auth/data/models/user_dto.dart';
 import 'package:untitled/features/auth/domain/entities/token.dart';
-import 'package:untitled/features/auth/domain/entities/user_entity.dart';
 
 class UserService {
   Future<UserDTO> getUserByAccessToken(Token accessToken) async {
