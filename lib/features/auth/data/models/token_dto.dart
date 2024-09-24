@@ -1,5 +1,5 @@
 import 'package:untitled/core/enums/auth_token_type.dart';
-import 'package:untitled/features/auth/domain/entities/token.dart';
+import 'package:untitled/features/auth/domain/entities/token_entity.dart';
 
 class TokenDTO {
   final String accessToken;
@@ -17,10 +17,10 @@ class TokenDTO {
     );
   }
 
-  List<Token> toDomain() {
+  List<TokenEntity> toDomain() {
     return [
-      Token(token: accessToken, type: AuthTokenType.accessToken),
-      Token(token: refreshToken, type: AuthTokenType.refreshToken),
+      TokenEntity(token: accessToken, type: AuthTokenType.accessToken),
+      TokenEntity(token: refreshToken, type: AuthTokenType.refreshToken),
     ];
   }
 }

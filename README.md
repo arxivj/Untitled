@@ -60,6 +60,8 @@ lib/
 ├── features/             # 특정 기능(feature)을 정의하는 폴더 (예: Oauth 인증 기능)
 │   ├── auth/             # 인증 관련 기능을 담당하는 폴더
 │   │   ├── data/         # 실제 데이터 소스(API, 외부 서비스 등)와 상호작용하는 계층
+│   │   │   ├── mappers/
+│   │   │   │   └── user_mapper_impl.dart        # User UserDTO <-> UserEntity 변환 담당
 │   │   │   ├── models/        # 서버에서 받은 데이터를 클라이언트에서 사용하기 위한 DTO를 정의
 │   │   │   │   ├── email_password_user_dto.dart  # 이메일/비밀번호 로그인 관련 데이터를 전송하기 위한 DTO
 │   │   │   │   ├── oauth_user_dto.dart           # OAuth 로그인 관련 데이터를 전송하기 위한 DTO
@@ -76,7 +78,12 @@ lib/
 │   │   │   └── auth_module.dart    # Auth 관련 클래스들의 DI 설정을 담당 (MultiProvider에서 사용할 의존성 리스트를 관리)
 │   │   ├── domain/         # 애플리케이션의 비즈니스 로직과 규칙을 처리하는 계층
 │   │   │   ├── entities/      # 도메인 레이어에서 사용하는 데이터 구조를 정의 (비즈니스 로직에 사용되는 엔티티)
-│   │   │   │   └── auth_user_entity.dart  # 레포지토리에서 변환된 DTO를 엔티티로 변환하여 도메인 로직에서 사용
+│   │   │   │   ├── email_password_user_entity.dart
+│   │   │   │   ├── oauth_user_entity.dart           
+│   │   │   │   ├── token_entity.dart
+│   │   │   │   └── user_entity.dart              
+│   │   │   ├── mappers/
+│   │   │   │   └── user_mapper.dart   # UserMapper 인터페이스 정의 
 │   │   │   ├── repositories/  # 도메인 레이어에서 사용할 레포지토리의 추상 클래스 (데이터 레이어에서 구현)
 │   │   │   │   └── auth_repository.dart   # 인증 관련 레포지토리의 추상 정의, 실제 구현은 데이터 레이어에서 수행
 │   │   │   ├── usecases/      # 비즈니스 로직을 처리하는 유스케이스. Entity를 사용해 로직을 실행하고 처리된 데이터를 반환
