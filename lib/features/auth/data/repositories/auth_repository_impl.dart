@@ -10,6 +10,7 @@ import 'package:untitled/features/auth/data/service/user_service.dart';
 import 'package:untitled/features/auth/data/storage/token_storage.dart';
 import 'package:untitled/features/auth/domain/entities/token.dart';
 import 'package:untitled/features/auth/domain/entities/user_entity.dart';
+import 'package:untitled/features/auth/domain/mappers/token_mapper.dart';
 import 'package:untitled/features/auth/domain/mappers/user_mapper.dart';
 import 'package:untitled/features/auth/domain/repositories/auth_repository.dart';
 
@@ -21,6 +22,7 @@ class AuthRepositoryImpl implements AuthRepository {
   final UserService userService;
   final LogoutService logoutService;
   final UserMapper userMapper;
+  final TokenMapper tokenMapper;
 
   AuthRepositoryImpl({
     required this.oAuthLoginService,
@@ -29,7 +31,8 @@ class AuthRepositoryImpl implements AuthRepository {
     required this.tokenStorage,
     required this.userService,
     required this.logoutService,
-    required this.userMapper
+    required this.userMapper,
+    required this.tokenMapper,
   });
 
   @override
@@ -54,8 +57,8 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<List<Token>> requestToken(UserEntity user) async {
     final userDTO = userMapper.toDTO(user);
-    final response = await tokenService.requestTokenFromServer(userDTO);
-    return tokenService.parseTokens(response);
+    final tokenDTO = await tokenService.requestTokenFromServer(userDTO);
+    return tokenMapper.toEntity(tokenDTO);
   }
 
   @override
