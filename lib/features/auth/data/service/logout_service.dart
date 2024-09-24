@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:untitled/core/exceptions/exceptions.dart';
-import 'package:untitled/features/auth/domain/entities/user_entity.dart';
 
 class LogoutService {
   Future<void> logout(String accessToken) async {

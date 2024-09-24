@@ -1,11 +1,11 @@
 import 'package:untitled/core/enums/auth_token_type.dart';
 import 'package:untitled/features/auth/data/models/token_dto.dart';
-import 'package:untitled/features/auth/domain/entities/token.dart';
+import 'package:untitled/features/auth/domain/entities/token_entity.dart';
 import 'package:untitled/features/auth/domain/mappers/token_mapper.dart';
 
 class TokenMapperImpl implements TokenMapper {
   @override
-  TokenDTO toDTO(List<Token> tokens) {
+  TokenDTO toDTO(List<TokenEntity> tokens) {
     final accessToken = tokens.firstWhere((token) => token.type == AuthTokenType.accessToken).token;
     final refreshToken = tokens.firstWhere((token) => token.type == AuthTokenType.refreshToken).token;
 
@@ -16,10 +16,10 @@ class TokenMapperImpl implements TokenMapper {
   }
 
   @override
-  List<Token> toEntity(TokenDTO dto) {
+  List<TokenEntity> toEntity(TokenDTO dto) {
     return [
-      Token(token: dto.accessToken, type: AuthTokenType.accessToken),
-      Token(token: dto.refreshToken, type: AuthTokenType.refreshToken),
+      TokenEntity(token: dto.accessToken, type: AuthTokenType.accessToken),
+      TokenEntity(token: dto.refreshToken, type: AuthTokenType.refreshToken),
     ];
   }
 }

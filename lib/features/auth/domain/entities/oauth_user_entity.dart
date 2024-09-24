@@ -1,4 +1,3 @@
-import 'package:untitled/core/enums/auth_user_field.dart';
 import 'package:untitled/features/auth/domain/entities/user_entity.dart';
 
 class OAuthUserEntity extends UserEntity {

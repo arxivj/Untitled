@@ -1,15 +1,14 @@
 import 'package:untitled/core/enums/auth_token_type.dart';
 
-class Token {
+class TokenEntity {
   final String token;
   final AuthTokenType type;
 
-  Token({
+  TokenEntity({
     required this.token,
     required this.type,
   });
 
   @override
   String toString() => 'Token(token: $token, type: ${type.name})';
-  // String toString() => token;
 }

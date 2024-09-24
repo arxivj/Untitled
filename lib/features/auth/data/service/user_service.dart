@@ -5,11 +5,10 @@ import 'package:untitled/core/enums/auth_user_field.dart';
 import 'package:untitled/features/auth/data/models/email_password_user_dto.dart';
 import 'package:untitled/features/auth/data/models/oauth_user_dto.dart';
 import 'package:untitled/features/auth/data/models/user_dto.dart';
-import 'package:untitled/features/auth/domain/entities/token.dart';
 
 class UserService {
-  Future<UserDTO> getUserByAccessToken(Token accessToken) async {
-    final token = accessToken.token;
+  Future<UserDTO> getUserByAccessToken(String accessToken) async {
+    final token = accessToken;
     final response = await http.get(
       Uri.parse('http://192.168.0.36:8080/api/auth/user'),
       headers: {
