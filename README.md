@@ -78,7 +78,10 @@ lib/
 │   │   │   └── auth_module.dart    # Auth 관련 클래스들의 DI 설정을 담당 (MultiProvider에서 사용할 의존성 리스트를 관리)
 │   │   ├── domain/         # 애플리케이션의 비즈니스 로직과 규칙을 처리하는 계층
 │   │   │   ├── entities/      # 도메인 레이어에서 사용하는 데이터 구조를 정의 (비즈니스 로직에 사용되는 엔티티)
-│   │   │   │   └── auth_user_entity.dart  # 레포지토리에서 변환된 DTO를 엔티티로 변환하여 도메인 로직에서 사용
+│   │   │   │   ├── email_password_user_entity.dart
+│   │   │   │   ├── oauth_user_entity.dart           
+│   │   │   │   ├── token_entity.dart
+│   │   │   │   └── user_entity.dart              
 │   │   │   ├── mappers/
 │   │   │   │   └── user_mapper.dart   # UserMapper 인터페이스 정의 
 │   │   │   ├── repositories/  # 도메인 레이어에서 사용할 레포지토리의 추상 클래스 (데이터 레이어에서 구현)
