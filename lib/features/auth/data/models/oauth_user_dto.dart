@@ -21,4 +21,13 @@ class OAuthUserDTO extends UserDTO {
     });
     return json;
   }
+
+  factory OAuthUserDTO.fromJson(Map<String, dynamic> json) {
+    return OAuthUserDTO(
+      email: json[AuthUserField.email.jsonKey],
+      platform: json[AuthUserField.platform.jsonKey],
+      oauthId: json[AuthUserField.oAuthId.jsonKey],
+      oauthToken: json[AuthUserField.oAuthToken.jsonKey],
+    );
+  }
 }

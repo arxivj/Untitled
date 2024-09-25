@@ -18,9 +18,7 @@ class TokenService {
 
     if (response.statusCode == HttpStatus.ok) {
       final Map<String, dynamic> tokenDataMap = jsonDecode(response.body);
-      return TokenDTO(
-          accessToken: tokenDataMap[AuthTokenType.accessToken.jsonKey],
-          refreshToken: tokenDataMap[AuthTokenType.refreshToken.jsonKey]);
+      return TokenDTO.fromJson(tokenDataMap);
     } else {
       throw Exception('Failed to authenticate with server');
     }

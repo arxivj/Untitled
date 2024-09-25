@@ -21,17 +21,9 @@ class UserService {
 
       if (data.containsKey(AuthUserField.oAuthId.jsonKey) &&
           data.containsKey(AuthUserField.oAuthToken.jsonKey)) {
-        return OAuthUserDTO(
-          email: data[AuthUserField.email.jsonKey],
-          platform: data[AuthUserField.platform.jsonKey],
-          oauthId: data[AuthUserField.oAuthId.jsonKey],
-          oauthToken: data[AuthUserField.oAuthToken.jsonKey],
-        );
+        return OAuthUserDTO.fromJson(data);
       } else {
-        return EmailPasswordUserDTO(
-          email: data[AuthUserField.email.jsonKey],
-          platform: data[AuthUserField.platform.jsonKey],
-        );
+        return EmailPasswordUserDTO.fromJson(data);
       }
     } else {
       throw Exception('Failed to fetch user');

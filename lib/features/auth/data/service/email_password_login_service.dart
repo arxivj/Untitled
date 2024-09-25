@@ -18,15 +18,10 @@ class EmailPasswordLoginService {
       },
       body: jsonEncode(requestData),
     );
-
     if (response.statusCode != HttpStatus.ok) {
       throw Exception('이메일/비밀번호 로그인에 실패하였습니다.');
     }
-
     final responseData = jsonDecode(response.body);
-
-    return EmailPasswordUserDTO(
-        email: responseData[AuthUserField.email.jsonKey],
-        platform: responseData[AuthUserField.platform.jsonKey]);
+    return EmailPasswordUserDTO.fromJson(responseData);
   }
 }
