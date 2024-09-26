@@ -22,11 +22,13 @@ class OAuthLoginService {
 
     final GoogleSignInAuthentication auth = await account.authentication;
 
+    final String? googleIdToken = auth.idToken;
+
     return OAuthUserDTO(
       email: account.email,
-      platform: platform.platformId,
+      platform: platform,
       oauthId: account.id,
-      oauthToken: auth.idToken,
+      oauthToken: googleIdToken,
     );
   }
 }

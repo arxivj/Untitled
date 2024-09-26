@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:untitled/core/enums/auth_user_field.dart';
 import 'package:untitled/features/auth/data/models/email_password_user_dto.dart';
 import 'package:untitled/features/auth/data/models/user_dto.dart';
 
