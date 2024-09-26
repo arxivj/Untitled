@@ -6,8 +6,8 @@ import 'package:untitled/features/auth/domain/mappers/token_mapper.dart';
 class TokenMapperImpl implements TokenMapper {
   @override
   TokenDTO toDTO(List<TokenEntity> tokens) {
-    final accessToken = tokens.firstWhere((token) => token.type == AuthTokenType.accessToken).token;
-    final refreshToken = tokens.firstWhere((token) => token.type == AuthTokenType.refreshToken).token;
+    final accessToken = tokens.firstWhere((token) => token.type == AuthTokenType.accessToken).value;
+    final refreshToken = tokens.firstWhere((token) => token.type == AuthTokenType.refreshToken).value;
 
     return TokenDTO(
       accessToken: accessToken,
@@ -18,8 +18,8 @@ class TokenMapperImpl implements TokenMapper {
   @override
   List<TokenEntity> toEntity(TokenDTO dto) {
     return [
-      TokenEntity(token: dto.accessToken, type: AuthTokenType.accessToken),
-      TokenEntity(token: dto.refreshToken, type: AuthTokenType.refreshToken),
+      TokenEntity(value: dto.accessToken, type: AuthTokenType.accessToken),
+      TokenEntity(value: dto.refreshToken, type: AuthTokenType.refreshToken),
     ];
   }
 }
